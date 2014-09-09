@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load mezzanine_tags keyword_tags %}
+
+{% block meta_title %}Lessons On Video - Login{% endblock %}
+
+{% block title %}
+Lessons On Video - Login
+{% endblock %}
+
+{% block main %}
+    <div id="content">
+        <form method="POST">
+            {% csrf_token %}
+            <table class="table">
+                <tbody>
+                    {{ form.as_table }}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" class="btn btn-primary" value="Login" />
+                            <span>or <a href="{% url 'signup' %}">sign up</a> if you don't have an account yet.</span>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+    </div>
+{% endblock %}
