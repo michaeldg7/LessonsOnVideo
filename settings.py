@@ -266,6 +266,7 @@ INSTALLED_APPS = (
 AUTHENTICATION_BACKENDS = (
     "social.backends.facebook.FacebookOAuth2",
     "social.backends.twitter.TwitterOAuth",
+    "social.backends.google.GoogleOAuth2",
     "django.contrib.auth.backends.ModelBackend",
 )
 
@@ -274,6 +275,8 @@ SOCIAL_AUTH_FACEBOOK_SECRET = ''
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_TWITTER_KEY = ''
 SOCIAL_AUTH_TWITTER_SECRET = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'last_name', 'email']
 
