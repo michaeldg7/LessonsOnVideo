@@ -255,6 +255,7 @@ INSTALLED_APPS = (
     "embed_video",
     "ordered_model",
     "social.apps.django_app.default",
+    "mptt",
     # local apps
     "lessons",
 )

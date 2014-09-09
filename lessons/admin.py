@@ -3,17 +3,19 @@ import ast
 from django.contrib import admin
 
 from embed_video.admin import AdminVideoMixin
+from mptt.admin import MPTTModelAdmin
 from ordered_model.admin import OrderedModelAdmin
 
 from lessons.models import Category, VideoLesson
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(MPTTModelAdmin):
     """
     Admin view for :model:'lessons.Category' model
     """
     model = Category
     prepopulated_fields = {"slug": ("title", )}
+    mptt_level_indent = 20
 
 
 class VideoLessonAdmin(AdminVideoMixin, OrderedModelAdmin):

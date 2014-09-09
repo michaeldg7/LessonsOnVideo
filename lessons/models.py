@@ -6,13 +6,15 @@ from django.template.defaultfilters import slugify
 
 from embed_video.backends import detect_backend
 from embed_video.fields import EmbedVideoField
+from mptt.models import MPTTModel, TreeForeignKey
 from ordered_model.models import OrderedModel
 
 
-class Category(models.Model):
+class Category(MPTTModel):
     """
     Stores information about Video Categories.
     """
+    parent = TreeForeignKey("self", blank=True, null=True, related_name='children')
     title = models.CharField(max_length=64, unique=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
 
@@ -36,7 +38,7 @@ class VideoLesson(OrderedModel):
     Stores information about Video Lessons
     """
     user = models.ForeignKey(User)
-    category = models.ForeignKey(Category)
+    category = TreeForeignKey(Category)
     video = EmbedVideoField()
     info = models.TextField(blank=True, null=True)
     order_with_respect_to = 'category'
