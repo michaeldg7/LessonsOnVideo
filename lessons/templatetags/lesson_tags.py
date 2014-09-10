@@ -11,7 +11,7 @@ def convert_to_time(seconds):
     h = 0
     m, s = divmod(seconds, 60)
     if m > 60:
-        h, m = (m, 60)
+        h, m = divmod(m, 60)
 
     duration = "%02d:%02d" % (m, s)
     if h > 0:
