@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load mezzanine_tags keyword_tags %}
+{% load mezzanine_tags keyword_tags i18n %}
 
 {% block meta_title %}Lessons On Video - Sign Up{% endblock %}
 
@@ -7,22 +7,28 @@
 Lessons On Video - Signup
 {% endblock %}
 
+{% block breadcrumb %}
+<li class="active">Signup</li>
+{% endblock %}
+
 {% block main %}
-    <div id="content">
-        <form method="POST">
-            {% csrf_token %}
-            <table class="table">
-                <tbody>
-                    {{ form.as_table }}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" class="btn btn-primary" value="Sign Up" />
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </form>
+    <div class="sections come-in">
+        <div class="table-responsive">
+            <form method="POST">
+                {% csrf_token %}
+                <table class="table">
+                    <tbody>
+                        {{ form.as_table }}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">
+                                <input type="submit" class="btn btn-primary" value="Sign Up" />
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </form>
+        </div>
     </div>
 {% endblock %}

@@ -7,23 +7,29 @@
 Lessons On Video - Login
 {% endblock %}
 
+{% block breadcrumb %}
+<li class="active">Login</li>
+{% endblock %}
+
 {% block main %}
-    <div id="content">
-        <form method="POST">
-            {% csrf_token %}
-            <table class="table">
-                <tbody>
-                    {{ form.as_table }}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" class="btn btn-primary" value="Login" />
+    <div class="sections come-in">
+        <div class="table-responsive">
+            <form method="POST">
+                {% csrf_token %}
+                <table class="table">
+                    <tbody>
+                        {{ form.as_table }}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">
+                                <input type="submit" class="btn btn-primary" value="Login" />
                             <span>or <a href="{% url 'signup' %}">sign up</a> if you don't have an account yet.</span>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </form>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </form>
+        </div>
     </div>
 {% endblock %}
