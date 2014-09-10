@@ -42,8 +42,11 @@ class VideoLesson(OrderedModel):
     """
     user = models.ForeignKey(User)
     category = TreeForeignKey(Category)
+    title = models.CharField(max_length=255, blank=True, null=True)
+    duration = models.PositiveIntegerField("Duration in Seconds", default=0)
     video = EmbedVideoField()
     info = models.TextField(blank=True, null=True)
+
     order_with_respect_to = 'category'
 
     class Meta:
@@ -97,4 +100,6 @@ class VideoLesson(OrderedModel):
             info.update({"backend": backend.backend})
             info.update({"thumbnail": backend.thumbnail})
             self.info = info
+            self.title = info['title']
+            self.duration = info['duration']
             self.save()

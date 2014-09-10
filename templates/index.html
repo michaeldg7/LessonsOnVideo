@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n embed_video_tags lesson_tags %}
 
 {% block meta_title %}{% trans "Home" %}{% endblock %}
 {% block title %}{% trans "Home" %}{% endblock %}
@@ -9,165 +9,41 @@
 {% endblock %}
 
 {% block main %}
-{% blocktrans %}
     <!-- Contents Section Started -->
     <div class="sections">
         <h2 class="heading">Featured Videos</h2>
         <div class="clearfix"></div>
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12"> 
-                <!-- Video Box Start -->
-                <div class="videobox2">
-                    <figure> 
-                        <!-- Video Thumbnail Start --> 
-                        <a href="video-detail-double-sidebar.html">
-                            <img src="{{ STATIC_URL }}theme/images/img1.jpg" class="img-responsive hovereffect" alt="" />
-                        </a> 
-                        <!-- Video Thumbnail End --> 
-                        <!-- Video Info Start -->
-                        <div class="vidopts">
-                            <ul>
-                                <li><i class="fa fa-heart"></i>1056</li>
-                                <li><i class="fa fa-clock-o"></i>12:23</li>
-                            </ul>
-                            <div class="clearfix"></div>
+            {% for lesson in lessons %}
+                {% video lesson.video as vid %}
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12"> 
+                        <!-- Video Box Start -->
+                        <div class="videobox2">
+                            <figure> 
+                                <!-- Video Thumbnail Start --> 
+                                <a href="#">
+                                    <img src="{{ vid.thumbnail }}" class="img-responsive hovereffect" alt="" />
+                                </a> 
+                                <!-- Video Thumbnail End -->
+                                <!-- Video Info Start -->
+                                <div class="vidopts">
+                                    <ul>
+                                        <li><i class="fa fa-clock-o"></i>{{ lesson.duration|convert_to_time }}</li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <!-- Video Info End --> 
+                            </figure>
+                            <!-- Video Title Start -->
+                            <h4><a href="video-detail-double-sidebar.html">{{ lesson.title }}</a></h4>
+                            <!-- Video Title End --> 
                         </div>
-                        <!-- Video Info End --> 
-                    </figure>
-                    <!-- Video Title Start -->
-                    <h4><a href="video-detail-double-sidebar.html">Darkness bearings</a></h4>
-                    <!-- Video Title End --> 
-                </div>
-                <!-- Video Box End --> 
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12"> 
-                <!-- Video Box Start -->
-                <div class="videobox2">
-                    <figure> 
-                        <!-- Video Thumbnail Start --> 
-                        <a href="video-detail-double-sidebar.html">
-                            <img src="{{ STATIC_URL }}theme/images/img2.jpg" class="img-responsive hovereffect" alt="" />
-                        </a> 
-                        <!-- Video Thumbnail End --> 
-                        <!-- Video Info Start -->
-                        <div class="vidopts">
-                            <ul>
-                                <li><i class="fa fa-heart"></i>1056</li>
-                                <li><i class="fa fa-clock-o"></i>12:23</li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <!-- Video Info End --> 
-                    </figure>
-                    <!-- Video Title Start -->
-                    <h4><a href="video-detail-double-sidebar.html">Waters isn't one</a></h4>
-                    <!-- Video Title End --> 
-                </div>
-                <!-- Video Box End --> 
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12"> 
-                <!-- Video Box Start -->
-                <div class="videobox2">
-                    <figure> 
-                        <!-- Video Thumbnail Start --> 
-                        <a href="video-detail-double-sidebar.html">
-                            <img src="{{ STATIC_URL }}theme/images/img3.jpg" class="img-responsive hovereffect" alt="" />
-                        </a> 
-                        <!-- Video Thumbnail End --> 
-                        <!-- Video Info Start -->
-                        <div class="vidopts">
-                            <ul>
-                                <li><i class="fa fa-heart"></i>1056</li>
-                                <li><i class="fa fa-clock-o"></i>12:23</li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <!-- Video Info End --> 
-                    </figure>
-                    <!-- Video Title Start -->
-                    <h4><a href="video-detail-double-sidebar.html">Life night dominion</a></h4>
-                    <!-- Video Title End --> 
-                </div>
-                <!-- Video Box End --> 
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12"> 
-                <!-- Video Box Start -->
-                <div class="videobox2">
-                    <figure> 
-                        <!-- Video Thumbnail Start --> 
-                        <a href="video-detail-double-sidebar.html">
-                            <img src="{{ STATIC_URL }}theme/images/img4.jpg" class="img-responsive hovereffect" alt="" />
-                        </a> 
-                        <!-- Video Thumbnail End --> 
-                        <!-- Video Info Start -->
-                        <div class="vidopts">
-                            <ul>
-                                <li><i class="fa fa-heart"></i>1056</li>
-                                <li><i class="fa fa-clock-o"></i>12:23</li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <!-- Video Info End --> 
-                    </figure>
-                    <!-- Video Title Start -->
-                    <h4><a href="video-detail-double-sidebar.html">Shall Have And Two</a></h4>
-                    <!-- Video Title End --> 
-                </div>
-                <!-- Video Box End --> 
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12"> 
-                <!-- Video Box Start -->
-                <div class="videobox2">
-                    <figure> 
-                        <!-- Video Thumbnail Start --> 
-                        <a href="video-detail-double-sidebar.html">
-                            <img src="{{ STATIC_URL }}theme/images/img5.jpg" class="img-responsive hovereffect" alt="" />
-                        </a> 
-                        <!-- Video Thumbnail End --> 
-                        <!-- Video Info Start -->
-                        <div class="vidopts">
-                            <ul>
-                                <li><i class="fa fa-heart"></i>1056</li>
-                                <li><i class="fa fa-clock-o"></i>12:23</li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <!-- Video Info End --> 
-                    </figure>
-                    <!-- Video Title Start -->
-                    <h4><a href="video-detail-double-sidebar.html">Greater Spirit</a></h4>
-                    <!-- Video Title End --> 
-                </div>
-                <!-- Video Box End --> 
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12"> 
-                <!-- Video Box Start -->
-                <div class="videobox2">
-                    <figure> 
-                        <!-- Video Thumbnail Start --> 
-                        <a href="video-detail-double-sidebar.html">
-                            <img src="{{ STATIC_URL }}theme/images/img6.jpg" class="img-responsive hovereffect" alt="" />
-                        </a> 
-                        <!-- Video Thumbnail End --> 
-                        <!-- Video Info Start -->
-                        <div class="vidopts">
-                            <ul>
-                                <li><i class="fa fa-heart"></i>1056</li>
-                                <li><i class="fa fa-clock-o"></i>12:23</li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <!-- Video Info End --> 
-                    </figure>
-                    <!-- Video Title Start -->
-                    <h4><a href="video-detail-double-sidebar.html">Fruitful Subdue</a></h4>
-                    <!-- Video Title End --> 
-                </div>
-                <!-- Video Box End --> 
-            </div>
+                        <!-- Video Box End --> 
+                    </div>
+                {% endvideo %}
+            {% endfor %}
         </div>
     </div>
     <!-- Contents Section End -->
     <div class="clearfix"></div>
-{% endblocktrans %}
 {% endblock %}

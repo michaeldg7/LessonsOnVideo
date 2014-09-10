@@ -33,7 +33,7 @@ class VideoLessonAdmin(AdminVideoMixin, OrderedModelAdmin):
             'fields': ('user', )
         }),
         ('Video Info', {
-            'fields': ('get_title', 'video', 'category')
+            'fields': ('get_title', 'video', 'category', 'info')
         }),
         )
 
