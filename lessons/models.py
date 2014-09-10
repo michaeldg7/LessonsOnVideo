@@ -43,6 +43,7 @@ class VideoLesson(OrderedModel):
     user = models.ForeignKey(User)
     category = TreeForeignKey(Category)
     title = models.CharField(max_length=255, blank=True, null=True)
+    slug = models.SlugField(unique=True, blank=True, null=True)
     duration = models.PositiveIntegerField("Duration in Seconds", default=0)
     video = EmbedVideoField()
     info = models.TextField(blank=True, null=True)
@@ -101,5 +102,6 @@ class VideoLesson(OrderedModel):
             info.update({"thumbnail": backend.thumbnail})
             self.info = info
             self.title = info['title']
+            self.slug = "%s-%s" % (self.id, slugify(self.title))
             self.duration = info['duration']
             self.save()
