@@ -1,151 +1,1022 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
 {% load pages_tags mezzanine_tags i18n future staticfiles %}
 
 <head>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+<!--// Responsive //-->
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
 <meta name="description" content="{% block meta_description %}{% endblock %}">
-<title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
-<link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
-
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="HandheldFriendly" content="True">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<!--// Stylesheets //-->
+<link href="{{ STATIC_URL }}theme/css/style.css" rel="stylesheet" media="screen" />
+<link href="{{ STATIC_URL }}theme/css/bootstrap.css" rel="stylesheet" media="screen" />
+<link href="{{ STATIC_URL }}theme/images/favicon.ico" rel="icon" type="image/x-icon" />
 {% ifinstalled mezzanine.blog %}
-<link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
-<link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
+    <link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
 {% endifinstalled %}
-
-{% compress css %}
-<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
-<link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
-<link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}">
 {% if LANGUAGE_BIDI %}
-<link rel="stylesheet" href="{% static "css/rtl.css" %}">
+    <link rel="stylesheet" href="{% static "css/rtl.css" %}">
 {% endif %}
 {% ifinstalled cartridge.shop %}
-<link rel="stylesheet" href="{% static "css/cartridge.css" %}">
-{% if LANGUAGE_BIDI %}
-<link rel="stylesheet" href="{% static "css/cartridge.rtl.css" %}">
-{% endif %}
+    <link rel="stylesheet" href="{% static "css/cartridge.css" %}">
+    {% if LANGUAGE_BIDI %}
+        <link rel="stylesheet" href="{% static "css/cartridge.rtl.css" %}">
+    {% endif %}
 {% endifinstalled %}
 {% block extra_css %}{% endblock %}
-{% endcompress %}
-
-{% compress js %}
-<script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
-<script src="{% static "js/bootstrap.js" %}"></script>
-<script src="{% static "js/bootstrap-extras.js" %}"></script>
-{% block extra_js %}{% endblock %}
-{% endcompress %}
-
 <!--[if lt IE 9]>
-<script src="{% static "js/html5shiv.js" %}"></script>
-<script src="{% static "js/respond.min.js" %}"></script>
+    <script src="{{ STATIC_URL }}theme/js/html5shiv.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}theme/js/respond.min.js"></script>
 <![endif]-->
-
 {% block extra_head %}{% endblock %}
 </head>
-
 <body id="{% block body_id %}body{% endblock %}">
+<!-- Wrapper Start -->
+<div class="wrapper"> 
+    <!-- Header Start -->
+    <header>
+        <!-- Header Top Strip Start -->
+        <div class="topstrip">
+            <div class="custom-container">
+                <div class="row">
+                    <!-- Top Categories Start -->
+                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-6">
+                        <div class="topcategories">
+                            <!-- navbar Start -->
+                            <div class="navbar yamm navbar-default">
+                                <div class="navbar-header">
+                                    <button type="button" data-toggle="collapse" data-target="#navbar-collapse-2" class="navbar-toggle">
+                                        <i class="fa fa-bars"></i> Categories
+                                    </button>
+                                </div>
+                                <div id="navbar-collapse-2" class="navbar-collapse collapse">
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="video-list.html">Music</a></li>
+                                        <li><a href="video-list.html">Funny</a></li>
+                                        <li><a href="video-list.html">Movies</a></li>
+                                        <li><a href="video-list.html">Sport</a></li>
+                                        <li><a href="video-list.html">News</a></li>
+                                        <li><a href="video-list.html">Arts</a></li>
+                                        <li><a href="video-list.html">Gaming</a></li>
+                                        <li><a href="video-list.html">Tech</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <!-- Top Categories End -->
+                    <!-- Social Network Start -->
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+                        <div class="socialnetworks">
+                            <ul class="pull-right">
+                                <li>
+                                    <a href="{% url 'social:begin' 'facebook' %}" data-toggle="tooltip" title="Facebook" data-placement="bottom" class="facebook">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'social:begin' 'twitter' %}" data-toggle="tooltip" title="Twitter" data-placement="bottom" class="twitter">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <!-- <li>
+                                    <a href="#" data-toggle="tooltip" title="Youtube" data-placement="bottom" class="youtube">
+                                        <i class="fa fa-youtube"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-toggle="tooltip" title="Vimeo" data-placement="bottom" class="vimeo">
+                                        <i class="fa fa-vimeo-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-toggle="tooltip" title="Pinterest" data-placement="bottom" class="pinterest">
+                                        <i class="fa fa-pinterest"></i>
+                                    </a>
+                                </li> -->
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <!-- Social Network End -->
+                </div>
+            </div>
+        </div>
+        <!-- Header Top Strip End -->
+        <!-- Logo + Search + Advertisment Start -->
+        <div class="logobar">
+            <div class="custom-container">
+                <div class="row">
+                    <!-- Logo Start -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="logo">
+                            <a href="index.html"><img src="{{ STATIC_URL }}theme/images/logo.png" alt="Lessons On Video" /></a>
+                        </div>
+                    </div>
+                    <!-- Logo End -->
+                    <!-- Search Start -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="searchbox">
+                            <form>
+                                <ul>
+                                    <li><input type="text" placeholder="Search Videos" /></li>
+                                    <li class="pull-right"><input type="submit" value="GO" /></li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Search End -->
+                    <!-- Advertisment Start -->
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                        <figure class="header-adv">
+                            <a href="#"><img src="{{ STATIC_URL }}theme/images/adv.gif" class="img-responsive" alt="Advertisment" /></a>
+                        </figure>
+                    </div>
+                    <!-- Advertisment End -->
+                </div>
+            </div>
+        </div>
+        <!-- Logo + Search + Advertisment End -->
+        <!-- Navigation Strip Start -->
+        <div class="navigationstrip stickynav bordercolor-top">
+            <div class="custom-container">
+                <div class="row">
+                    <!-- Navigation Start -->
+                    <div class="col-lg-10 col-md-9 col-sm-6 col-xs-4">
+                        <div class="navigation">
+                            <!-- navbar Start -->
+                            <div class="navbar yamm navbar-default">
+                                <div class="row">
+                                    <div class="navbar-header">
+                                        <button type="button" data-toggle="collapse" data-target="#navbar-collapse-1" class="navbar-toggle">
+                                            <i class="fa fa-bars"></i> Menu
+                                        </button>
+                                    </div>
+                                    <div id="navbar-collapse-1" class="navbar-collapse collapse">
+                                        <ul class="nav navbar-nav">
+                                            <!-- Home Page Styles Start -->
+                                            <li class="dropdown">
+                                                <a href="{% url 'home' %}" data-toggle="dropdown" class="dropdown-toggle">Page Styles</a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <!-- Content container to add padding -->
+                                                        <div class="yamm-content">
+                                                            <div class="row">
+                                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                    <h5>Home Page Styles</h5>
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="index.html">Home Page 1</a></li>
+                                                                        <li><a href="index2.html">Home Page 2</a></li>
+                                                                        <li><a href="index3.html">Home Page 3</a></li>
+                                                                        <li><a href="index4.html">Home Page 4</a></li>
+                                                                        <li><a href="index5.html">Home Page 5</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                    <h5>Header Styles</h5>
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="index.html">Header Style 1</a></li>
+                                                                        <li><a href="header2.html">Header Style 2</a></li>
+                                                                        <li><a href="header3.html">Header Style 3</a></li>
+                                                                        <li><a href="header4.html">Header Style 4</a></li>
+                                                                        <li><a href="header5.html">Header Style 5</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                    <h5>Footer Styles</h5>
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="index.html">Footer Style 1</a></li>
+                                                                        <li><a href="footer2.html">Footer Style 2</a></li>
+                                                                        <li><a href="footer3.html">Footer Style 3</a></li>
+                                                                        <li><a href="footer4.html">Footer Style 4</a></li>
+                                                                        <li><a href="footer5.html">Footer Style 5</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Home Page Styles End -->
+                                            <!-- Video Pages Start -->
+                                            <li class="dropdown">
+                                                <a href="videos-double-sidebar.html" data-toggle="dropdown" class="dropdown-toggle">Videos</a>
+                                                <ul class="dropdown-menu">
+                                                    <li> 
+                                                        <!-- Content container to add padding -->
+                                                        <div class="yamm-content">
+                                                            <div class="row">
+                                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                    <h5>Video - Grid View</h5>
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="videos-double-sidebar.html">Double Sidebar</a></li>
+                                                                        <li><a href="videos-single-sidebar.html">Single Sidebar</a></li>
+                                                                        <li><a href="videos-fullwidth.html">Fullwidth</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                    <h5>Video - Carousel</h5>
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="videos-carousel-double-sidebar.html">Double Sidebar</a></li>
+                                                                        <li><a href="videos-carousel-single-sidebar.html">Single Sidebar</a></li>
+                                                                        <li><a href="videos-carousel-fullwidth.html">Fullwidth</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                    <h5>Video Detail</h5>
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="video-detail-double-sidebar.html">Double Sidebar</a></li>
+                                                                        <li><a href="video-detail-single-sidebar.html">Single Sidebar</a></li>
+                                                                        <li><a href="video-detail-fullwidth.html">Fullwidth</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-lg-12 hidden-xs">
+                                                                    <h2 class="heading">Today's Hot Videos</h2>
+                                                                </div>
+                                                                <div class="col-lg-4 hidden-xs">
+                                                                    <!-- Video Box Start --> 
+                                                                    <div class="videobox">
+                                                                        <figure> 
+                                                                            <!-- Video Thumbnail Start --> 
+                                                                            <a href="video-detail-double-sidebar.html">
+                                                                                <img src="{{ STATIC_URL }}theme/images/img1.jpg" alt="" class="img-responsive hovereffect" />
+                                                                            </a> 
+                                                                            <!-- Video Thumbnail End --> 
+                                                                            <!-- Video Title + Info Start -->
+                                                                            <figcaption>
+                                                                                <h2><a href="video-detail-double-sidebar.html">Tempor ac ac, nisi</a></h2>
+                                                                                <ul>
+                                                                                    <li><i class="fa fa-heart"></i>1056</li>
+                                                                                    <li><i class="fa fa-comments"></i>58</li>
+                                                                                    <li><i class="fa fa-clock-o"></i>12:23</li>
+                                                                                </ul>
+                                                                                <div class="clearfix"></div>
+                                                                            </figcaption>
+                                                                            <!-- Video Title + Info End --> 
+                                                                        </figure>
+                                                                    </div>
+                                                                    <!-- Video Box End --> 
+                                                                </div>
+                                                                <div class="col-lg-4 hidden-xs">
+                                                                    <!-- Video Box Start -->
+                                                                    <div class="videobox">
+                                                                        <figure> 
+                                                                            <!-- Video Thumbnail Start --> 
+                                                                            <a href="video-detail-double-sidebar.html">
+                                                                                <img src="{{ STATIC_URL }}theme/images/img2.jpg" alt="" class="img-responsive hovereffect" />
+                                                                            </a> 
+                                                                            <!-- Video Thumbnail End --> 
+                                                                            <!-- Video Title + Info Start -->
+                                                                            <figcaption>
+                                                                                <h2><a href="video-detail-double-sidebar.html">Mauris egestas augue</a></h2>
+                                                                                <ul>
+                                                                                    <li><i class="fa fa-heart"></i>1056</li>
+                                                                                    <li><i class="fa fa-comments"></i>58</li>
+                                                                                    <li><i class="fa fa-clock-o"></i>12:23</li>
+                                                                                </ul>
+                                                                                <div class="clearfix"></div>
+                                                                            </figcaption>
+                                                                            <!-- Video Title + Info End --> 
+                                                                        </figure>
+                                                                    </div>
+                                                                    <!-- Video Box End --> 
+                                                                </div>
+                                                                <div class="col-lg-4 hidden-xs">
+                                                                    <!-- Video Box Start -->
+                                                                    <div class="videobox">
+                                                                        <figure> 
+                                                                            <!-- Video Thumbnail Start --> 
+                                                                            <a href="video-detail-double-sidebar.html">
+                                                                                <img src="{{ STATIC_URL }}theme/images/img3.jpg" alt="" class="img-responsive hovereffect" />
+                                                                            </a> 
+                                                                            <!-- Video Thumbnail End --> 
+                                                                            <!-- Video Title + Info Start -->
+                                                                            <figcaption>
+                                                                                <h2><a href="video-detail-double-sidebar.html">Hac turpis rhoncus</a></h2>
+                                                                                <ul>
+                                                                                    <li><i class="fa fa-heart"></i>1056</li>
+                                                                                    <li><i class="fa fa-comments"></i>58</li>
+                                                                                    <li><i class="fa fa-clock-o"></i>12:23</li>
+                                                                                </ul>
+                                                                                <div class="clearfix"></div>
+                                                                            </figcaption>
+                                                                            <!-- Video Title + Info End --> 
+                                                                        </figure>
+                                                                    </div>
+                                                                    <!-- Video Box End --> 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Video Pages End -->
+                                            <!-- Blog Pages Start -->
+                                            <li class="dropdown">
+                                                <a href="blog-double-sidebar.html" data-toggle="dropdown" class="dropdown-toggle">Blog</a>
+                                                <ul class="dropdown-menu">
+                                                    <li> 
+                                                        <!-- Content container to add padding -->
+                                                        <div class="yamm-content">
+                                                            <div class="row">
+                                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                    <h5>Blog - Grid View</h5>
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="blog-double-sidebar.html">Double Sidebar</a></li>
+                                                                        <li><a href="blog-single-sidebar.html">Single Sidebar</a></li>
+                                                                        <li><a href="blog-fullwidth.html">Fullwidth</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                    <h5>Blog - Carousel</h5>
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="blog-carousel-double-sidebar.html">Double Sidebar</a></li>
+                                                                        <li><a href="blog-carousel-single-sidebar.html">Single Sidebar</a></li>
+                                                                        <li><a href="blog-carousel-fullwidth.html">Fullwidth</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                    <h5>Blog Detail</h5>
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="blogdetail-double-sidebar.html">Double Sidebar</a></li>
+                                                                        <li><a href="blogdetail-single-sidebar.html">Single Sidebar</a></li>
+                                                                        <li><a href="blogdetail-fullwidth.html">Fullwidth</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-lg-12 hidden-xs">
+                                                                    <h2 class="heading">What's New In blog</h2>
+                                                                </div>
+                                                                <div class="col-lg-4 hidden-xs"> 
+                                                                    <!-- Recent Post Start -->
+                                                                    <div class="blogposttwo">
+                                                                        <figure>
+                                                                            <a href="blogdetail-double-sidebar.html">
+                                                                                <img alt="" class="img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img4.jpg" />
+                                                                            </a>
+                                                                        </figure>
+                                                                        <div class="text">
+                                                                            <h4><a href="#">Gathering Kind</a></h4>
+                                                                            <ul>
+                                                                                <li><i class="fa fa-calendar"></i>25-03-2014</li>
+                                                                                <li> <i class="fa fa-align-justify"></i> <a href="#">News</a> </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Recent Post End --> 
+                                                                </div>
+                                                                <div class="col-lg-4 hidden-xs"> 
+                                                                    <!-- Recent Post Start -->
+                                                                    <div class="blogposttwo">
+                                                                        <figure>
+                                                                            <a href="blogdetail-double-sidebar.html">
+                                                                                <img alt="" class="img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img5.jpg" />
+                                                                            </a>
+                                                                        </figure>
+                                                                        <div class="text">
+                                                                            <h4><a href="#">Multiply Moves</a></h4>
+                                                                            <ul>
+                                                                                <li><i class="fa fa-calendar"></i>25-03-2014</li>
+                                                                                <li> <i class="fa fa-align-justify"></i> <a href="#">News</a> </li>
+                                                                            </ul>
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-<div class="container">
-<div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">{% trans "Toggle Navigation" %}</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-    {% if settings.SITE_TITLE %}<a class="navbar-brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
-    {% if settings.SITE_TAGLINE %}<p class="navbar-text visible-lg">{{ settings.SITE_TAGLINE }}</p>{% endif %}
-</div>
-<div class="navbar-collapse collapse">
-    {% search_form "all" %}
-    {% page_menu "pages/menus/dropdown.html" %}
-</div>
-</div>
-</div>
-
-<div class="container">
-
-{% nevercache %}
-{% if messages %}
-<div class="messages">
-{% for message in messages %}
-<div class="alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{ message }}
-</div>
-{% endfor %}
-</div>
-{% endif %}
-{% endnevercache %}
-
-<h1>{% block title %}{% endblock %}</h1>
-
-<ul class="breadcrumb">
-{% spaceless %}
-{% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}
-{% endspaceless %}
-</ul>
-
-</div>
-
-<div class="container">
-<div class="row">
-
-<div class="col-md-2 left">
-    {% block left_panel %}
-    <div class="panel panel-default tree">{% page_menu "pages/menus/tree.html" %}</div>
-    {% endblock %}
-</div>
-
-<div class="col-md-7 middle">
-    {% block main %}{% endblock %}
-</div>
-
-<div class="col-md-3 right">
-    {% nevercache %}
-    {% include "includes/user_panel.html" %}
-    {% endnevercache %}
-    <div class="panel panel-default">
-    <div class="panel-body">
-    {% block right_panel %}
-    {% ifinstalled mezzanine.twitter %}
-    {% include "twitter/tweets.html" %}
-    {% endifinstalled %}
-    {% endblock %}
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Recent Post End --> 
+                                                                </div>
+                                                                <div class="col-lg-4 hidden-xs"> 
+                                                                    <!-- Recent Post Start -->
+                                                                    <div class="blogposttwo">
+                                                                        <figure>
+                                                                            <a href="blogdetail-double-sidebar.html">
+                                                                                <img alt="" class="img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img6.jpg" />
+                                                                            </a>
+                                                                        </figure>
+                                                                        <div class="text">
+                                                                            <h4><a href="#">Second Seed</a></h4>
+                                                                            <ul>
+                                                                                <li><i class="fa fa-calendar"></i>25-03-2014</li>
+                                                                                <li> <i class="fa fa-align-justify"></i> <a href="#">News</a> </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Recent Post End --> 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Blog Pages End -->
+                                            <!-- Gallery Start -->
+                                            <li class="dropdown">
+                                                <a href="gallery-double-sidebar.html" data-toggle="dropdown" class="dropdown-toggle">Gallery</a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <!-- Content container to add padding -->
+                                                        <div class="yamm-content">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                                    <h5>Gallery - Grid View</h5>
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="gallery-double-sidebar.html">Double Sidebar</a></li>
+                                                                        <li><a href="gallery-single-sidebar.html">Single Sidebar</a></li>
+                                                                        <li><a href="gallery-fullwidth.html">Fullwidth</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                                    <h5>Gallery - Carousel</h5>
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="gallery-carousel-double-sidebar.html">Double Sidebar</a></li>
+                                                                        <li><a href="gallery-carousel-single-sidebar.html">Single Sidebar</a></li>
+                                                                        <li><a href="gallery-carousel-fullwidth.html">Fullwidth</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Gallery End -->
+                                            <!-- Shortcode Start -->
+                                            <li class="dropdown">
+                                                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Shortcodes</a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <!-- Content container to add padding -->
+                                                        <div class="yamm-content">
+                                                            <div class="row">
+                                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="shortcode-icons.html">icons</a></li>
+                                                                        <li><a href="shortcode-videos.html">Videos</a></li>
+                                                                        <li><a href="shortcode-audios.html">Audios</a></li>
+                                                                        <li><a href="shortcode-images.html">Images</a></li>
+                                                                        <li><a href="shortcode-buttons.html">Buttons</a></li>
+                                                                        <li><a href="shortcode-lightboxes.html">Lightboxes</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="shortcode-columns.html">Columns</a></li>
+                                                                        <li><a href="shortcode-typography.html">Typography</a></li>
+                                                                        <li><a href="shortcode-forms.html">Form Fields</a></li>
+                                                                        <li><a href="shortcode-alerts.html">Alerts</a></li>
+                                                                        <li><a href="shortcode-mediaobjects.html">Media Objects</a></li>
+                                                                        <li><a href="shortcode-liststyles.html">List Styles</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="shortcode-googlemap.html">Google Map</a></li>
+                                                                        <li><a href="shortcode-accordion.html">Accordion</a></li>
+                                                                        <li><a href="shortcode-tabs.html">Tabs</a></li>
+                                                                        <li><a href="shortcode-tooltips.html">Tooltips</a></li>
+                                                                        <li><a href="shortcode-carousals.html">Carousals</a></li>
+                                                                        <li><a href="shortcode-tables.html">Tables</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Shortcode End -->
+                                            <!-- Contact Us Start -->
+                                            <li class="dropdown yamm-fw">
+                                                <a href="contact-us.html" data-toggle="dropdown" class="dropdown-toggle">Contact Us</a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <div class="yamm-content">
+                                                            <div class="row">
+                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                    <a href="contact-us.html">
+                                                                        <strong>
+                                                                            <i class="fa fa-envelope"></i>
+                                                                            View contact us page or write your message here
+                                                                        </strong>
+                                                                    </a>
+                                                                    <hr />
+                                                                </div>
+                                                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                    <div class="contact-forms">
+                                                                        <form>
+                                                                            <div class="row">
+                                                                                <div class="col-lg-6 col-md-6 col-sm-12 .col-xs-12">
+                                                                                    <input type="text" placeholder="Your Name" />
+                                                                                </div>
+                                                                                <div class="col-lg-6 col-md-6 col-sm-12 .col-xs-12">
+                                                                                    <input type="text" placeholder="Email Address" />
+                                                                                </div>
+                                                                                <div class="col-lg-12 col-md-12 col-sm-12 .col-xs-12">
+                                                                                    <input type="text" placeholder="Subject" />
+                                                                                </div>
+                                                                                <div class="col-lg-12 col-md-12 col-sm-12 .col-xs-12">
+                                                                                    <textarea placeholder="Message"></textarea>
+                                                                                </div>
+                                                                                <div class="col-lg-12 col-md-12 col-sm-12 .col-xs-12">
+                                                                                    <button type="button" class="btn btn-primary backcolor">
+                                                                                        <span>Submit message</span>
+                                                                                        <i class="fa fa-angle-right"></i>
+                                                                                    </button>
+                                                                                    <p>Make sure you put a valid email.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 hidden-xs">
+                                                                    <div class="dropdownmap">
+                                                                        <iframe src="https://maps.google.com/?ie=UTF8&amp;ll=51.428327,-0.086517&amp;spn=0.64303,1.674042&amp;t=m&amp;z=10&amp;output=embed"></iframe>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!-- navbar End -->
+                        </div>
+                    </div>
+                    <!-- Navigation End -->
+                    <!-- Login Start -->
+                    <div class="col-lg-2 col-md-3 col-sm-6 col-xs-8">
+                        <div class="loginsec pull-right">
+                            <a href="#" class="colorhover"><i class="fa fa-lock"></i>Login</a>
+                            <a href="#" class="colorhover"><i class="fa fa-sign-in"></i>Sign Up</a>
+                        </div>
+                    </div>
+                    <!-- Login End -->
+                </div>
+            </div>
+        </div>
+        <!-- Navigation Strip End -->
+    </header>
+    <!-- Header End -->
+    <!-- Contents Start -->
+    <div class="contents">
+        <div class="custom-container">
+            <div class="row"> 
+                <!-- Bread Crumb Start -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <ol class="breadcrumb">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        {% block breadcrumb %}{% endblock %}
+                    </ol>
+                </div>
+                <!-- Bread Crumb End -->
+                <!-- Content Column Start -->
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 equalcol conentsection">
+                    {% block main %}
+                    {% endblock %}
+                </div>
+                <!-- Content Column End --> 
+                <!-- Gray Sidebar Start -->
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 equalcol graysidebar"> 
+                    <!-- Interactive Tabs Widget start -->
+                    <div class="widget">
+                        <div class="interactivetabs"> 
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="intertabs">
+                                <li class="active"><a href="#twittertab" data-toggle="tab"><i class="fa fa-twitter"></i>Twitter</a></li>
+                                <li><a href="#blogtab" data-toggle="tab"><i class="fa fa-comments"></i>Blog</a></li>
+                                <li><a href="#abouttab" data-toggle="tab"><i class="fa fa-video-camera"></i>Videos</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <!-- Twitter Tab Start -->
+                                <div class="tab-pane fade in active" id="twittertab">
+                                    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/envato" data-widget-id="461477479849291776">
+                                        Tweets by @envato
+                                    </a> 
+                                    <script>
+                                        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+                                    </script> 
+                                </div>
+                                <!-- Twitter Tab End -->
+                                <!-- Blog Tab Start -->
+                                <div class="tab-pane fade" id="blogtab">
+                                    <ul class="recentposts">
+                                        <li>
+                                            <h5><a href="blogdetail-double-sidebar.html">Dolor. Proin. Sit rhoncus ut odio nascetur</a></h5>
+                                            <p class="date">25 April 2013</p>
+                                        </li>
+                                        <li>
+                                            <h5><a href="blogdetail-double-sidebar.html"> Urna nec, cursus, dictumst! Etiam</a></h5>
+                                            <p class="date">01 May 2013</p>
+                                        </li>
+                                        <li>
+                                            <h5><a href="blogdetail-double-sidebar.html">Lundium turpis platea? In vel auctor tincidunt</a></h5>
+                                            <p class="date">25 April 2013</p>
+                                        </li>
+                                        <li>
+                                            <h5><a href="blogdetail-double-sidebar.html">Pulvinar, elementum ac, lectus parturient.</a></h5>
+                                            <p class="date">01 May 2013</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Blog Tab End -->
+                                <!-- Video List Tab Start -->
+                                <div class="tab-pane fade" id="abouttab">
+                                    <div class="videolistsmall">
+                                        <ul class="bloglist">
+                                            <li>
+                                                <div class="media">
+                                                    <a href="video-detail-double-sidebar.html" class="pull-left">
+                                                        <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img16.jpg" alt="" />
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <h5><a href="video-detail-double-sidebar.html">Dann Petty on Curabitur</a></h5>
+                                                        <ul>
+                                                            <li><i class="fa fa-clock-o"></i>10:56</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="media">
+                                                    <a href="video-detail-double-sidebar.html" class="pull-left">
+                                                        <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img17.jpg" alt="" />
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <h5><a href="video-detail-double-sidebar.html">Falling Down Focus</a></h5>
+                                                        <ul>
+                                                            <li><i class="fa fa-clock-o"></i>10:56</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="media">
+                                                    <a href="video-detail-double-sidebar.html" class="pull-left">
+                                                        <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img18.jpg" alt="" />
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <h5><a href="video-detail-double-sidebar.html">Waters Fourth Winged</a></h5>
+                                                        <ul>
+                                                            <li><i class="fa fa-clock-o"></i>10:56</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Video List Tab End -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- Interactive Tabs Widget End --> 
+                    <!-- Calendar Widget start -->
+                    <div class="widget">
+                        <div class="calendar">
+                            <div id="datepicker"></div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- Calendar Widget End --> 
+                    <!-- Comments Widget start -->
+                    <div class="widget">
+                        <h2 class="heading">Comments</h2>
+                        <div class="commentslist">
+                            <ul>
+                                <li><a href="blogdetail-double-sidebar.html">Dolor. Proin. Sit rhoncus ut odio nascetur mus a placerat</a></li>
+                                <li>
+                                    <a href="blogdetail-double-sidebar.html">
+                                        Etiam, aliquet a tempor arcu, nisi. Lundium turpis platea? In vel auctor tincidunt, eros dignissim vel, porttitor hac eros! Augue pid? Tortor urna et natoque, sociis.
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="blogdetail-double-sidebar.html">
+                                        Turpis cum, in elementum elit. Placerat, porta sagittis. Pulvinar, elementum ac, lectus parturient.
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- Comments Widget End -->
+                    <!-- Small Video Posts Widget start -->
+                    <div class="widget">
+                        <h2 class="heading">Music</h2>
+                        <div class="videolistsmall">
+                            <ul class="bloglist">
+                                <li>
+                                    <div class="media">
+                                        <a href="video-detail-double-sidebar.html" class="pull-left">
+                                            <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img16.jpg" alt="" />
+                                        </a>
+                                        <div class="media-body">
+                                            <h5><a href="video-detail-double-sidebar.html">Dann Petty on Curabitur</a></h5>
+                                            <ul>
+                                                <li><i class="fa fa-clock-o"></i>10:56</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="media">
+                                        <a href="video-detail-double-sidebar.html" class="pull-left">
+                                            <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img17.jpg" alt="" />
+                                        </a>
+                                        <div class="media-body">
+                                            <h5><a href="video-detail-double-sidebar.html">Falling Down Focus</a></h5>
+                                            <ul>
+                                                <li><i class="fa fa-clock-o"></i>10:56</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="media">
+                                        <a href="video-detail-double-sidebar.html" class="pull-left">
+                                            <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img18.jpg" alt="" />
+                                        </a>
+                                        <div class="media-body">
+                                            <h5><a href="video-detail-double-sidebar.html">Waters Fourth Winged</a></h5>
+                                            <ul>
+                                                <li><i class="fa fa-clock-o"></i>10:56</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- Small Video Posts Widget End -->
+                    <!-- Advertisement start -->
+                    <div class="widget"> <img src="{{ STATIC_URL }}theme/images/adv2.gif" class="img-responsive" alt=""> </div>
+                    <div class="clearfix"></div>
+                    <!-- Advertisement End --> 
+                    <!-- Recent Post Widget start -->
+                    <div class="widget">
+                        <h2 class="heading">Recent Posts</h2>
+                        <ul class="recentposts">
+                            <li>
+                                <h5><a href="blogdetail-double-sidebar.html">Dolor. Proin. Sit rhoncus ut odio nascetur</a></h5>
+                                <p class="date">25 April 2013</p>
+                            </li>
+                            <li>
+                                <h5><a href="blogdetail-double-sidebar.html"> Urna nec, cursus, dictumst! Etiam</a></h5>
+                                <p class="date">01 May 2013</p>
+                            </li>
+                            <li>
+                                <h5><a href="blogdetail-double-sidebar.html">Lundium turpis platea? In vel auctor tincidunt</a></h5>
+                                <p class="date">25 April 2013</p>
+                            </li>
+                            <li>
+                                <h5><a href="blogdetail-double-sidebar.html">Pulvinar, elementum ac, lectus parturient.</a></h5>
+                                <p class="date">01 May 2013</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- Recent Post Widget end --> 
+                </div>
+                <!-- Gray Sidebar End --> 
+            </div>
+        </div>
     </div>
-    </div>
+    <!-- Contents End -->
+    <!-- Footer Start -->
+    <footer class="style1">
+        <div class="custom-container">
+            <!-- Footer Videos Start -->
+            <div class="row">
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6"> 
+                    <!-- Video Box Start -->
+                    <div class="videobox">
+                        <figure> 
+                            <!-- Video Thumbnail Start --> 
+                            <a href="video-detail-double-sidebar.html">
+                                <img src="{{ STATIC_URL }}theme/images/img19.jpg" alt="" class="img-responsive hovereffect" />
+                            </a> 
+                            <!-- Video Thumbnail End --> 
+                            <!-- Video Title + Info Start -->
+                            <figcaption>
+                                <h2><a href="video-detail-double-sidebar.html">Waters Years</a></h2>
+                                <div class="clearfix"></div>
+                            </figcaption>
+                            <!-- Video Title + Info End --> 
+                        </figure>
+                    </div>
+                    <!-- Video Box End --> 
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6"> 
+                    <!-- Video Box Start -->
+                    <div class="videobox">
+                        <figure> 
+                            <!-- Video Thumbnail Start --> 
+                            <a href="video-detail-double-sidebar.html">
+                                <img src="{{ STATIC_URL }}theme/images/img20.jpg" alt="" class="img-responsive hovereffect" />
+                            </a> 
+                            <!-- Video Thumbnail End --> 
+                            <!-- Video Title + Info Start -->
+                            <figcaption>
+                                <h2><a href="video-detail-double-sidebar.html">Fourth Winged</a></h2>
+                                <div class="clearfix"></div>
+                            </figcaption>
+                            <!-- Video Title + Info End --> 
+                        </figure>
+                    </div>
+                    <!-- Video Box End -->
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6"> 
+                    <!-- Video Box Start -->
+                    <div class="videobox">
+                        <figure> 
+                            <!-- Video Thumbnail Start --> 
+                            <a href="video-detail-double-sidebar.html">
+                                <img src="{{ STATIC_URL }}theme/images/img21.jpg" alt="" class="img-responsive hovereffect" />
+                            </a> 
+                            <!-- Video Thumbnail End --> 
+                            <!-- Video Title + Info Start -->
+                            <figcaption>
+                                <h2><a href="video-detail-double-sidebar.html">Gathering Creepeth</a></h2>
+                                <div class="clearfix"></div>
+                            </figcaption>
+                            <!-- Video Title + Info End --> 
+                        </figure>
+                    </div>
+                    <!-- Video Box End -->
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6"> 
+                    <!-- Video Box Start -->
+                    <div class="videobox">
+                        <figure> 
+                            <!-- Video Thumbnail Start --> 
+                            <a href="video-detail-double-sidebar.html">
+                                <img src="{{ STATIC_URL }}theme/images/img22.jpg" alt="" class="img-responsive hovereffect" />
+                            </a> 
+                            <!-- Video Thumbnail End --> 
+                            <!-- Video Title + Info Start -->
+                            <figcaption>
+                                <h2><a href="video-detail-double-sidebar.html">Firmament Fly</a></h2>
+                                <div class="clearfix"></div>
+                            </figcaption>
+                            <!-- Video Title + Info End --> 
+                        </figure>
+                    </div>
+                    <!-- Video Box End -->
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6"> 
+                    <!-- Video Box Start -->
+                    <div class="videobox">
+                        <figure> 
+                            <!-- Video Thumbnail Start --> 
+                            <a href="video-detail-double-sidebar.html">
+                                <img src="{{ STATIC_URL }}theme/images/img23.jpg" alt="" class="img-responsive hovereffect" />
+                            </a> 
+                            <!-- Video Thumbnail End --> 
+                            <!-- Video Title + Info Start -->
+                            <figcaption>
+                                <h2><a href="video-detail-double-sidebar.html">First Sixth Be</a></h2>
+                                <div class="clearfix"></div>
+                            </figcaption>
+                            <!-- Video Title + Info End --> 
+                        </figure>
+                    </div>
+                    <!-- Video Box End -->
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6"> 
+                    <!-- Video Box Start -->
+                    <div class="videobox">
+                        <figure> 
+                            <!-- Video Thumbnail Start --> 
+                            <a href="video-detail-double-sidebar.html">
+                                <img src="{{ STATIC_URL }}theme/images/img24.jpg" alt="" class="img-responsive hovereffect" />
+                            </a> 
+                            <!-- Video Thumbnail End --> 
+                            <!-- Video Title + Info Start -->
+                            <figcaption>
+                                <h2><a href="video-detail-double-sidebar.html">Gathered Green</a></h2>
+                                <div class="clearfix"></div>
+                            </figcaption>
+                            <!-- Video Title + Info End --> 
+                        </figure>
+                    </div>
+                    <!-- Video Box End -->
+                </div>
+            </div>
+            <!-- Footer Videos End -->
+            <hr />
+            <div class="row footerwidgets">
+                <div class="col-lg-3 col-md-6 col-sm-6 .col-xs-12">
+                    <!-- Text Widget start -->
+                    <div class="widget">
+                        <div class="text-widget">
+                            <div class="textsec">
+                                <a href="index.html"><img src="{{ STATIC_URL }}theme/images/logo1.png" alt=""></a>
+                                <br /><br />
+                                <p>
+                                    Ut volutpat consectetur aliquam. Curabitur auctor in nis ulum ornare. Sed consequat, augue condimentum fermentum gravida, metus elit vehicula dui.
+                                </p>
+                                <ul class="contactdetail">
+                                    <li><i class="fa fa-mobile"></i> +1800 1234 56789</li>
+                                    <li><i class="fa fa-envelope"></i><a href="mailto:support@videoMagazine.com">support@videoMagazine.com</a></li>
+                                </ul>                            
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- Text Widget start -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 .col-xs-12">
+                    <!-- Flickr Widget start -->
+                    <div class="widget">
+                        <h2 class="heading">Flickr Photos</h2>
+                        <div class="flickrgallery">
+                            <ul>
+                                <li><a href="#"><img src="{{ STATIC_URL }}theme/images/img13.jpg" alt="" class="img-responsive hovereffect"></a></li>
+                                <li><a href="#"><img src="{{ STATIC_URL }}theme/images/img14.jpg" alt="" class="img-responsive hovereffect"></a></li>
+                                <li><a href="#"><img src="{{ STATIC_URL }}theme/images/img15.jpg" alt="" class="img-responsive hovereffect"></a></li>
+                                <li><a href="#"><img src="{{ STATIC_URL }}theme/images/img16.jpg" alt="" class="img-responsive hovereffect"></a></li>
+                                <li><a href="#"><img src="{{ STATIC_URL }}theme/images/img17.jpg" alt="" class="img-responsive hovereffect"></a></li>
+                                <li><a href="#"><img src="{{ STATIC_URL }}theme/images/img18.jpg" alt="" class="img-responsive hovereffect"></a></li>
+                                <li><a href="#"><img src="{{ STATIC_URL }}theme/images/img19.jpg" alt="" class="img-responsive hovereffect"></a></li>
+                                <li><a href="#"><img src="{{ STATIC_URL }}theme/images/img20.jpg" alt="" class="img-responsive hovereffect"></a></li>
+                                <li><a href="#"><img src="{{ STATIC_URL }}theme/images/img21.jpg" alt="" class="img-responsive hovereffect"></a></li>
+                                <li><a href="#"><img src="{{ STATIC_URL }}theme/images/img22.jpg" alt="" class="img-responsive hovereffect"></a></li>
+                                <li><a href="#"><img src="{{ STATIC_URL }}theme/images/img23.jpg" alt="" class="img-responsive hovereffect"></a></li>
+                                <li><a href="#"><img src="{{ STATIC_URL }}theme/images/img24.jpg" alt="" class="img-responsive hovereffect"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- Flickr Widget End -->
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 .col-xs-12">
+                    <div class="widget">
+                        <h2 class="heading">Send us a message</h2>
+                        <div class="contact-forms">
+                            <form>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-12 .col-xs-12">
+                                        <input type="text" placeholder="Your Name" />
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12 .col-xs-12">
+                                        <input type="text" placeholder="Email Address" />
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12 .col-xs-12">
+                                        <input type="text" placeholder="Subject" />
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-12 .col-xs-12">
+                                        <textarea placeholder="Message"></textarea>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12 .col-xs-12">
+                                        <button type="button" class="btn btn-primary backcolor"><span>Submit message</span><i class="fa fa-angle-right"></i></button>
+                                        <p>Make sure you put a valid email.</p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-9 .col-xs-9">
+                    <p class="copyrights">© 2014. All rights reserved. Designed by <a href="#"><strong>SoftCircles</strong></a></p>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-3 .col-xs-3">
+                    <div class="socialnetworks">
+                        <ul class="pull-right">
+                            <li><a href="#" data-toggle="tooltip" title="Facebook" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" data-toggle="tooltip" title="Youtube" class="youtube"><i class="fa fa-youtube"></i></a></li>
+                            <li><a href="#" data-toggle="tooltip" title="Twitter" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#" data-toggle="tooltip" title="Vimeo" class="vimeo"><i class="fa fa-vimeo-square"></i></a></li>
+                            <li><a href="#" data-toggle="tooltip" title="Pinterest" class="pinterest"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End --> 
+    <a href="#" class="pull-right gotop btn btn-primary backcolor"> <i class="fa fa-arrow-up"></i> </a>
 </div>
-
-</div>
-</div>
-
-<footer>
-<div class="container">
-{% page_menu "pages/menus/footer.html" %}
-
-<div class="row">
-<p class="site-info text-center">
-    {% trans "Powered by" %}
-    <a href="http://mezzanine.jupo.org">Mezzanine</a>{% ifinstalled cartridge.shop %},
-    <a href="http://cartridge.jupo.org">Cartridge</a>{% endifinstalled %}
-    {% trans "and" %}
-    <a href="http://www.djangoproject.com">Django</a>
-    <span class="separator">|</span>
-    {% trans "Theme by" %} <a target="_blank" href="http://getbootstrap.com">Bootstrap</a>
-    {% ifinstalled mezzanine.mobile %}
-    <span class="separator">|</span>
-    <a href="{% url "set_device" "mobile" %}?next={{ request.path }}">{% trans "View Mobile Site" %}</a>
-    {% endifinstalled %}
-</p>
-</div>
-</div>
-</footer>
-
-{% include "includes/footer_scripts.html" %}
-
+<!-- Wrapper End --> 
+<!--// Javascript //-->
+<script type="text/javascript" src="{{ STATIC_URL }}theme/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}theme/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}theme/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}theme/js/functions.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}theme/js/responsiveCarousel.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}theme/js/slimbox2.js"></script>
 </body>
 </html>
