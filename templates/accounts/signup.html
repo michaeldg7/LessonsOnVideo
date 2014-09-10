@@ -14,7 +14,7 @@ Lessons On Video - Signup
 {% block main %}
     <div class="sections come-in">
         <div class="table-responsive">
-            <form method="POST">
+            <form method="POST" role="form">
                 {% csrf_token %}
                 <table class="table">
                     <tbody>
@@ -23,7 +23,7 @@ Lessons On Video - Signup
                     <tfoot>
                         <tr>
                             <td colspan="2">
-                                <input type="submit" class="btn btn-primary" value="Sign Up" />
+                                <input type="submit" class="btn btn-primary backcolor" value="Sign Up" />
                             </td>
                         </tr>
                     </tfoot>

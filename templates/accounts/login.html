@@ -14,7 +14,7 @@ Lessons On Video - Login
 {% block main %}
     <div class="sections come-in">
         <div class="table-responsive">
-            <form method="POST">
+            <form method="POST" role="form">
                 {% csrf_token %}
                 <table class="table">
                     <tbody>
@@ -23,7 +23,7 @@ Lessons On Video - Login
                     <tfoot>
                         <tr>
                             <td colspan="2">
-                                <input type="submit" class="btn btn-primary" value="Login" />
+                                <input type="submit" class="btn btn-primary backcolor" value="Login" />
                             <span>or <a href="{% url 'signup' %}">sign up</a> if you don't have an account yet.</span>
                             </td>
                         </tr>
