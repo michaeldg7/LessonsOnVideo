@@ -1,0 +1,483 @@
+[
+{
+    "pk": 1, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 14, 
+        "parent": null, 
+        "title": "Academics", 
+        "level": 0, 
+        "lft": 1, 
+        "tree_id": 1, 
+        "slug": "academics"
+    }
+},
+{
+    "pk": 2, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 8, 
+        "parent": null, 
+        "title": "Test Prep", 
+        "level": 0, 
+        "lft": 1, 
+        "tree_id": 2, 
+        "slug": "test-prep"
+    }
+},
+{
+    "pk": 3, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 8, 
+        "parent": null, 
+        "title": "Career Ed", 
+        "level": 0, 
+        "lft": 1, 
+        "tree_id": 3, 
+        "slug": "career-ed"
+    }
+},
+{
+    "pk": 4, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 18, 
+        "parent": null, 
+        "title": "Foreign Language", 
+        "level": 0, 
+        "lft": 1, 
+        "tree_id": 4, 
+        "slug": "foreign-language"
+    }
+},
+{
+    "pk": 5, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 24, 
+        "parent": null, 
+        "title": "Programming & Web Dev", 
+        "level": 0, 
+        "lft": 1, 
+        "tree_id": 5, 
+        "slug": "programming-web-dev"
+    }
+},
+{
+    "pk": 6, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 2, 
+        "parent": null, 
+        "title": "Financial Aid", 
+        "level": 0, 
+        "lft": 1, 
+        "tree_id": 6, 
+        "slug": "financial-aid"
+    }
+},
+{
+    "pk": 7, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 3, 
+        "parent": 1, 
+        "title": "Math", 
+        "level": 1, 
+        "lft": 2, 
+        "tree_id": 1, 
+        "slug": "math"
+    }
+},
+{
+    "pk": 8, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 5, 
+        "parent": 1, 
+        "title": "Science", 
+        "level": 1, 
+        "lft": 4, 
+        "tree_id": 1, 
+        "slug": "science"
+    }
+},
+{
+    "pk": 9, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 7, 
+        "parent": 1, 
+        "title": "History", 
+        "level": 1, 
+        "lft": 6, 
+        "tree_id": 1, 
+        "slug": "history"
+    }
+},
+{
+    "pk": 10, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 9, 
+        "parent": 1, 
+        "title": "English", 
+        "level": 1, 
+        "lft": 8, 
+        "tree_id": 1, 
+        "slug": "english"
+    }
+},
+{
+    "pk": 11, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 11, 
+        "parent": 1, 
+        "title": "Chemistry", 
+        "level": 1, 
+        "lft": 10, 
+        "tree_id": 1, 
+        "slug": "chemistry"
+    }
+},
+{
+    "pk": 12, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 13, 
+        "parent": 1, 
+        "title": "Physics", 
+        "level": 1, 
+        "lft": 12, 
+        "tree_id": 1, 
+        "slug": "physics"
+    }
+},
+{
+    "pk": 13, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 3, 
+        "parent": 2, 
+        "title": "ACT", 
+        "level": 1, 
+        "lft": 2, 
+        "tree_id": 2, 
+        "slug": "act"
+    }
+},
+{
+    "pk": 14, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 5, 
+        "parent": 2, 
+        "title": "SAT", 
+        "level": 1, 
+        "lft": 4, 
+        "tree_id": 2, 
+        "slug": "sat"
+    }
+},
+{
+    "pk": 15, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 7, 
+        "parent": 2, 
+        "title": "MCAT", 
+        "level": 1, 
+        "lft": 6, 
+        "tree_id": 2, 
+        "slug": "mcat"
+    }
+},
+{
+    "pk": 16, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 3, 
+        "parent": 3, 
+        "title": "Automotive Technology", 
+        "level": 1, 
+        "lft": 2, 
+        "tree_id": 3, 
+        "slug": "automotive-technology"
+    }
+},
+{
+    "pk": 17, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 5, 
+        "parent": 3, 
+        "title": "Nursing", 
+        "level": 1, 
+        "lft": 4, 
+        "tree_id": 3, 
+        "slug": "nursing"
+    }
+},
+{
+    "pk": 18, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 7, 
+        "parent": 3, 
+        "title": "Physical Therapy", 
+        "level": 1, 
+        "lft": 6, 
+        "tree_id": 3, 
+        "slug": "physical-therapy"
+    }
+},
+{
+    "pk": 19, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 3, 
+        "parent": 4, 
+        "title": "Chinese (Mandarin)", 
+        "level": 1, 
+        "lft": 2, 
+        "tree_id": 4, 
+        "slug": "chinese-mandarin"
+    }
+},
+{
+    "pk": 20, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 5, 
+        "parent": 4, 
+        "title": "French", 
+        "level": 1, 
+        "lft": 4, 
+        "tree_id": 4, 
+        "slug": "french"
+    }
+},
+{
+    "pk": 21, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 7, 
+        "parent": 4, 
+        "title": "German", 
+        "level": 1, 
+        "lft": 6, 
+        "tree_id": 4, 
+        "slug": "german"
+    }
+},
+{
+    "pk": 22, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 9, 
+        "parent": 4, 
+        "title": "Japanese", 
+        "level": 1, 
+        "lft": 8, 
+        "tree_id": 4, 
+        "slug": "japanese"
+    }
+},
+{
+    "pk": 23, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 11, 
+        "parent": 4, 
+        "title": "Korean", 
+        "level": 1, 
+        "lft": 10, 
+        "tree_id": 4, 
+        "slug": "korean"
+    }
+},
+{
+    "pk": 24, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 13, 
+        "parent": 4, 
+        "title": "Spanish", 
+        "level": 1, 
+        "lft": 12, 
+        "tree_id": 4, 
+        "slug": "spanish"
+    }
+},
+{
+    "pk": 25, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 15, 
+        "parent": 4, 
+        "title": "Swedish", 
+        "level": 1, 
+        "lft": 14, 
+        "tree_id": 4, 
+        "slug": "swedish"
+    }
+},
+{
+    "pk": 26, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 17, 
+        "parent": 4, 
+        "title": "Russian", 
+        "level": 1, 
+        "lft": 16, 
+        "tree_id": 4, 
+        "slug": "russian"
+    }
+},
+{
+    "pk": 27, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 3, 
+        "parent": 5, 
+        "title": "C", 
+        "level": 1, 
+        "lft": 2, 
+        "tree_id": 5, 
+        "slug": "c"
+    }
+},
+{
+    "pk": 28, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 5, 
+        "parent": 5, 
+        "title": "C++", 
+        "level": 1, 
+        "lft": 4, 
+        "tree_id": 5, 
+        "slug": "c-plus-plus"
+    }
+},
+{
+    "pk": 29, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 7, 
+        "parent": 5, 
+        "title": "Drupal", 
+        "level": 1, 
+        "lft": 6, 
+        "tree_id": 5, 
+        "slug": "drupal"
+    }
+},
+{
+    "pk": 30, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 9, 
+        "parent": 5, 
+        "title": "Java", 
+        "level": 1, 
+        "lft": 8, 
+        "tree_id": 5, 
+        "slug": "java"
+    }
+},
+{
+    "pk": 31, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 11, 
+        "parent": 5, 
+        "title": "Javascript", 
+        "level": 1, 
+        "lft": 10, 
+        "tree_id": 5, 
+        "slug": "javascript"
+    }
+},
+{
+    "pk": 32, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 13, 
+        "parent": 5, 
+        "title": "Perl", 
+        "level": 1, 
+        "lft": 12, 
+        "tree_id": 5, 
+        "slug": "perl"
+    }
+},
+{
+    "pk": 33, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 15, 
+        "parent": 5, 
+        "title": "PHP", 
+        "level": 1, 
+        "lft": 14, 
+        "tree_id": 5, 
+        "slug": "php"
+    }
+},
+{
+    "pk": 34, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 17, 
+        "parent": 5, 
+        "title": "Python", 
+        "level": 1, 
+        "lft": 16, 
+        "tree_id": 5, 
+        "slug": "python"
+    }
+},
+{
+    "pk": 35, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 19, 
+        "parent": 5, 
+        "title": "Ruby & Ruby on Rails", 
+        "level": 1, 
+        "lft": 18, 
+        "tree_id": 5, 
+        "slug": "ruby-ruby-rails"
+    }
+},
+{
+    "pk": 36, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 21, 
+        "parent": 5, 
+        "title": "SEO", 
+        "level": 1, 
+        "lft": 20, 
+        "tree_id": 5, 
+        "slug": "seo"
+    }
+},
+{
+    "pk": 37, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 23, 
+        "parent": 5, 
+        "title": "Wordpress", 
+        "level": 1, 
+        "lft": 22, 
+        "tree_id": 5, 
+        "slug": "wordpress"
+    }
+}
+]

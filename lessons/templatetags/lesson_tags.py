@@ -1,5 +1,7 @@
 from django import template
 
+from lessons.models import Category
+
 register = template.Library()
 
 
@@ -17,3 +19,12 @@ def convert_to_time(seconds):
     if h > 0:
         duration = "%d:%02d:%02d" % (h, m, s)
     return duration
+
+
+@register.filter
+def get_children_categories(category):
+    """
+    Gets the children of the given category parameter
+    """
+    categories = Category.objects.filter(parent=category)
+    return categories

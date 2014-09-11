@@ -296,6 +296,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "mezzanine.pages.context_processors.page",
     "social.apps.django_app.context_processors.backends",
     "social.apps.django_app.context_processors.login_redirect",
+    "lessonsonvideo.context_processors.get_categories",
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
