@@ -70,6 +70,7 @@ urlpatterns += patterns('',
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
     url(r'^accounts/', include('accounts.urls')),
+    url(r'^lessons/', include('lessons.urls')),
     url('', include('social.apps.django_app.urls', namespace='social')),
     ("^", include("mezzanine.urls")),
 
