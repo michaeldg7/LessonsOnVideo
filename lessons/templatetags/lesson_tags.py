@@ -1,6 +1,6 @@
 from django import template
 
-from lessons.models import Category
+from lessons.models import Category, VideoLesson
 
 register = template.Library()
 
@@ -28,3 +28,12 @@ def get_children_categories(category):
     """
     categories = Category.objects.filter(parent=category)
     return categories
+
+
+@register.filter
+def get_videos_by_categories(categories):
+    """
+    Returns 'lessons.VideoLesson' queryset based on the given list of categories.
+    """
+    lessons = VideoLesson.objects.filter(category__in=categories)
+    return lessons

@@ -127,6 +127,7 @@ DEBUG = False
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 SITE_ID = 1
+SITE_TITLE = "Lessons On Video"
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.

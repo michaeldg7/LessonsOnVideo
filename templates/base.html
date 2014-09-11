@@ -180,7 +180,7 @@
                                                                     <div class="row">
                                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                             <ul class="list-unstyled">
-                                                                                {% for category in node|get_children_categories %}
+                                                                                {% for category in node.get_children %}
                                                                                     <li><a href="{% url 'category_videos' category.slug %}">{{ category.title }}</a></li>
                                                                                 {% endfor %}
                                                                             </ul>
@@ -234,217 +234,221 @@
                     </ol>
                 </div>
                 <!-- Bread Crumb End -->
-                <!-- Content Column Start -->
-                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 equalcol conentsection">
-                    {% block main %}
-                    {% endblock %}
-                </div>
-                <!-- Content Column End --> 
-                <!-- Gray Sidebar Start -->
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 equalcol graysidebar"> 
-                    <!-- Interactive Tabs Widget start -->
-                    <div class="widget">
-                        <div class="interactivetabs"> 
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" id="intertabs">
-                                <li class="active"><a href="#twittertab" data-toggle="tab"><i class="fa fa-twitter"></i>Twitter</a></li>
-                                <li><a href="#blogtab" data-toggle="tab"><i class="fa fa-comments"></i>Blog</a></li>
-                                <li><a href="#abouttab" data-toggle="tab"><i class="fa fa-video-camera"></i>Videos</a></li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <!-- Twitter Tab Start -->
-                                <div class="tab-pane fade in active" id="twittertab">
-                                    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/envato" data-widget-id="461477479849291776">
-                                        Tweets by @envato
-                                    </a> 
-                                    <script>
-                                        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-                                    </script> 
-                                </div>
-                                <!-- Twitter Tab End -->
-                                <!-- Blog Tab Start -->
-                                <div class="tab-pane fade" id="blogtab">
-                                    <ul class="recentposts">
-                                        <li>
-                                            <h5><a href="blogdetail-double-sidebar.html">Dolor. Proin. Sit rhoncus ut odio nascetur</a></h5>
-                                            <p class="date">25 April 2013</p>
-                                        </li>
-                                        <li>
-                                            <h5><a href="blogdetail-double-sidebar.html"> Urna nec, cursus, dictumst! Etiam</a></h5>
-                                            <p class="date">01 May 2013</p>
-                                        </li>
-                                        <li>
-                                            <h5><a href="blogdetail-double-sidebar.html">Lundium turpis platea? In vel auctor tincidunt</a></h5>
-                                            <p class="date">25 April 2013</p>
-                                        </li>
-                                        <li>
-                                            <h5><a href="blogdetail-double-sidebar.html">Pulvinar, elementum ac, lectus parturient.</a></h5>
-                                            <p class="date">01 May 2013</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- Blog Tab End -->
-                                <!-- Video List Tab Start -->
-                                <div class="tab-pane fade" id="abouttab">
-                                    <div class="videolistsmall">
-                                        <ul class="bloglist">
+                {% block index_main %}
+                {% endblock %}
+                {% block default_main %}
+                    <!-- Content Column Start -->
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 equalcol conentsection">
+                        {% block main %}
+                        {% endblock %}
+                    </div>
+                    <!-- Content Column End --> 
+                    <!-- Gray Sidebar Start -->
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 equalcol graysidebar"> 
+                        <!-- Interactive Tabs Widget start -->
+                        <div class="widget">
+                            <div class="interactivetabs"> 
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" id="intertabs">
+                                    <li class="active"><a href="#twittertab" data-toggle="tab"><i class="fa fa-twitter"></i>Twitter</a></li>
+                                    <li><a href="#blogtab" data-toggle="tab"><i class="fa fa-comments"></i>Blog</a></li>
+                                    <li><a href="#abouttab" data-toggle="tab"><i class="fa fa-video-camera"></i>Videos</a></li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <!-- Twitter Tab Start -->
+                                    <div class="tab-pane fade in active" id="twittertab">
+                                        <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/envato" data-widget-id="461477479849291776">
+                                            Tweets by @envato
+                                        </a> 
+                                        <script>
+                                            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+                                        </script> 
+                                    </div>
+                                    <!-- Twitter Tab End -->
+                                    <!-- Blog Tab Start -->
+                                    <div class="tab-pane fade" id="blogtab">
+                                        <ul class="recentposts">
                                             <li>
-                                                <div class="media">
-                                                    <a href="video-detail-double-sidebar.html" class="pull-left">
-                                                        <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img16.jpg" alt="" />
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <h5><a href="video-detail-double-sidebar.html">Dann Petty on Curabitur</a></h5>
-                                                        <ul>
-                                                            <li><i class="fa fa-clock-o"></i>10:56</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                <h5><a href="blogdetail-double-sidebar.html">Dolor. Proin. Sit rhoncus ut odio nascetur</a></h5>
+                                                <p class="date">25 April 2013</p>
                                             </li>
                                             <li>
-                                                <div class="media">
-                                                    <a href="video-detail-double-sidebar.html" class="pull-left">
-                                                        <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img17.jpg" alt="" />
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <h5><a href="video-detail-double-sidebar.html">Falling Down Focus</a></h5>
-                                                        <ul>
-                                                            <li><i class="fa fa-clock-o"></i>10:56</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                <h5><a href="blogdetail-double-sidebar.html"> Urna nec, cursus, dictumst! Etiam</a></h5>
+                                                <p class="date">01 May 2013</p>
                                             </li>
                                             <li>
-                                                <div class="media">
-                                                    <a href="video-detail-double-sidebar.html" class="pull-left">
-                                                        <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img18.jpg" alt="" />
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <h5><a href="video-detail-double-sidebar.html">Waters Fourth Winged</a></h5>
-                                                        <ul>
-                                                            <li><i class="fa fa-clock-o"></i>10:56</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                <h5><a href="blogdetail-double-sidebar.html">Lundium turpis platea? In vel auctor tincidunt</a></h5>
+                                                <p class="date">25 April 2013</p>
+                                            </li>
+                                            <li>
+                                                <h5><a href="blogdetail-double-sidebar.html">Pulvinar, elementum ac, lectus parturient.</a></h5>
+                                                <p class="date">01 May 2013</p>
                                             </li>
                                         </ul>
                                     </div>
+                                    <!-- Blog Tab End -->
+                                    <!-- Video List Tab Start -->
+                                    <div class="tab-pane fade" id="abouttab">
+                                        <div class="videolistsmall">
+                                            <ul class="bloglist">
+                                                <li>
+                                                    <div class="media">
+                                                        <a href="video-detail-double-sidebar.html" class="pull-left">
+                                                            <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img16.jpg" alt="" />
+                                                        </a>
+                                                        <div class="media-body">
+                                                            <h5><a href="video-detail-double-sidebar.html">Dann Petty on Curabitur</a></h5>
+                                                            <ul>
+                                                                <li><i class="fa fa-clock-o"></i>10:56</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="media">
+                                                        <a href="video-detail-double-sidebar.html" class="pull-left">
+                                                            <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img17.jpg" alt="" />
+                                                        </a>
+                                                        <div class="media-body">
+                                                            <h5><a href="video-detail-double-sidebar.html">Falling Down Focus</a></h5>
+                                                            <ul>
+                                                                <li><i class="fa fa-clock-o"></i>10:56</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="media">
+                                                        <a href="video-detail-double-sidebar.html" class="pull-left">
+                                                            <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img18.jpg" alt="" />
+                                                        </a>
+                                                        <div class="media-body">
+                                                            <h5><a href="video-detail-double-sidebar.html">Waters Fourth Winged</a></h5>
+                                                            <ul>
+                                                                <li><i class="fa fa-clock-o"></i>10:56</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- Video List Tab End -->
                                 </div>
-                                <!-- Video List Tab End -->
                             </div>
                         </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <!-- Interactive Tabs Widget End --> 
-                    <!-- Calendar Widget start -->
-                    <div class="widget">
-                        <div class="calendar">
-                            <div id="datepicker"></div>
+                        <div class="clearfix"></div>
+                        <!-- Interactive Tabs Widget End --> 
+                        <!-- Calendar Widget start -->
+                        <div class="widget">
+                            <div class="calendar">
+                                <div id="datepicker"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <!-- Calendar Widget End --> 
-                    <!-- Comments Widget start -->
-                    <div class="widget">
-                        <h2 class="heading">Comments</h2>
-                        <div class="commentslist">
-                            <ul>
-                                <li><a href="blogdetail-double-sidebar.html">Dolor. Proin. Sit rhoncus ut odio nascetur mus a placerat</a></li>
+                        <div class="clearfix"></div>
+                        <!-- Calendar Widget End --> 
+                        <!-- Comments Widget start -->
+                        <div class="widget">
+                            <h2 class="heading">Comments</h2>
+                            <div class="commentslist">
+                                <ul>
+                                    <li><a href="blogdetail-double-sidebar.html">Dolor. Proin. Sit rhoncus ut odio nascetur mus a placerat</a></li>
+                                    <li>
+                                        <a href="blogdetail-double-sidebar.html">
+                                            Etiam, aliquet a tempor arcu, nisi. Lundium turpis platea? In vel auctor tincidunt, eros dignissim vel, porttitor hac eros! Augue pid? Tortor urna et natoque, sociis.
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="blogdetail-double-sidebar.html">
+                                            Turpis cum, in elementum elit. Placerat, porta sagittis. Pulvinar, elementum ac, lectus parturient.
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- Comments Widget End -->
+                        <!-- Small Video Posts Widget start -->
+                        <div class="widget">
+                            <h2 class="heading">Music</h2>
+                            <div class="videolistsmall">
+                                <ul class="bloglist">
+                                    <li>
+                                        <div class="media">
+                                            <a href="video-detail-double-sidebar.html" class="pull-left">
+                                                <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img16.jpg" alt="" />
+                                            </a>
+                                            <div class="media-body">
+                                                <h5><a href="video-detail-double-sidebar.html">Dann Petty on Curabitur</a></h5>
+                                                <ul>
+                                                    <li><i class="fa fa-clock-o"></i>10:56</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <a href="video-detail-double-sidebar.html" class="pull-left">
+                                                <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img17.jpg" alt="" />
+                                            </a>
+                                            <div class="media-body">
+                                                <h5><a href="video-detail-double-sidebar.html">Falling Down Focus</a></h5>
+                                                <ul>
+                                                    <li><i class="fa fa-clock-o"></i>10:56</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <a href="video-detail-double-sidebar.html" class="pull-left">
+                                                <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img18.jpg" alt="" />
+                                            </a>
+                                            <div class="media-body">
+                                                <h5><a href="video-detail-double-sidebar.html">Waters Fourth Winged</a></h5>
+                                                <ul>
+                                                    <li><i class="fa fa-clock-o"></i>10:56</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- Small Video Posts Widget End -->
+                        <!-- Advertisement start -->
+                        <div class="widget"> <img src="{{ STATIC_URL }}theme/images/adv2.gif" class="img-responsive" alt=""> </div>
+                        <div class="clearfix"></div>
+                        <!-- Advertisement End --> 
+                        <!-- Recent Post Widget start -->
+                        <div class="widget">
+                            <h2 class="heading">Recent Posts</h2>
+                            <ul class="recentposts">
                                 <li>
-                                    <a href="blogdetail-double-sidebar.html">
-                                        Etiam, aliquet a tempor arcu, nisi. Lundium turpis platea? In vel auctor tincidunt, eros dignissim vel, porttitor hac eros! Augue pid? Tortor urna et natoque, sociis.
-                                    </a>
+                                    <h5><a href="blogdetail-double-sidebar.html">Dolor. Proin. Sit rhoncus ut odio nascetur</a></h5>
+                                    <p class="date">25 April 2013</p>
                                 </li>
                                 <li>
-                                    <a href="blogdetail-double-sidebar.html">
-                                        Turpis cum, in elementum elit. Placerat, porta sagittis. Pulvinar, elementum ac, lectus parturient.
-                                    </a>
+                                    <h5><a href="blogdetail-double-sidebar.html"> Urna nec, cursus, dictumst! Etiam</a></h5>
+                                    <p class="date">01 May 2013</p>
+                                </li>
+                                <li>
+                                    <h5><a href="blogdetail-double-sidebar.html">Lundium turpis platea? In vel auctor tincidunt</a></h5>
+                                    <p class="date">25 April 2013</p>
+                                </li>
+                                <li>
+                                    <h5><a href="blogdetail-double-sidebar.html">Pulvinar, elementum ac, lectus parturient.</a></h5>
+                                    <p class="date">01 May 2013</p>
                                 </li>
                             </ul>
                         </div>
+                        <div class="clearfix"></div>
+                        <!-- Recent Post Widget end --> 
                     </div>
-                    <div class="clearfix"></div>
-                    <!-- Comments Widget End -->
-                    <!-- Small Video Posts Widget start -->
-                    <div class="widget">
-                        <h2 class="heading">Music</h2>
-                        <div class="videolistsmall">
-                            <ul class="bloglist">
-                                <li>
-                                    <div class="media">
-                                        <a href="video-detail-double-sidebar.html" class="pull-left">
-                                            <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img16.jpg" alt="" />
-                                        </a>
-                                        <div class="media-body">
-                                            <h5><a href="video-detail-double-sidebar.html">Dann Petty on Curabitur</a></h5>
-                                            <ul>
-                                                <li><i class="fa fa-clock-o"></i>10:56</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="media">
-                                        <a href="video-detail-double-sidebar.html" class="pull-left">
-                                            <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img17.jpg" alt="" />
-                                        </a>
-                                        <div class="media-body">
-                                            <h5><a href="video-detail-double-sidebar.html">Falling Down Focus</a></h5>
-                                            <ul>
-                                                <li><i class="fa fa-clock-o"></i>10:56</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="media">
-                                        <a href="video-detail-double-sidebar.html" class="pull-left">
-                                            <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img18.jpg" alt="" />
-                                        </a>
-                                        <div class="media-body">
-                                            <h5><a href="video-detail-double-sidebar.html">Waters Fourth Winged</a></h5>
-                                            <ul>
-                                                <li><i class="fa fa-clock-o"></i>10:56</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <!-- Small Video Posts Widget End -->
-                    <!-- Advertisement start -->
-                    <div class="widget"> <img src="{{ STATIC_URL }}theme/images/adv2.gif" class="img-responsive" alt=""> </div>
-                    <div class="clearfix"></div>
-                    <!-- Advertisement End --> 
-                    <!-- Recent Post Widget start -->
-                    <div class="widget">
-                        <h2 class="heading">Recent Posts</h2>
-                        <ul class="recentposts">
-                            <li>
-                                <h5><a href="blogdetail-double-sidebar.html">Dolor. Proin. Sit rhoncus ut odio nascetur</a></h5>
-                                <p class="date">25 April 2013</p>
-                            </li>
-                            <li>
-                                <h5><a href="blogdetail-double-sidebar.html"> Urna nec, cursus, dictumst! Etiam</a></h5>
-                                <p class="date">01 May 2013</p>
-                            </li>
-                            <li>
-                                <h5><a href="blogdetail-double-sidebar.html">Lundium turpis platea? In vel auctor tincidunt</a></h5>
-                                <p class="date">25 April 2013</p>
-                            </li>
-                            <li>
-                                <h5><a href="blogdetail-double-sidebar.html">Pulvinar, elementum ac, lectus parturient.</a></h5>
-                                <p class="date">01 May 2013</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="clearfix"></div>
-                    <!-- Recent Post Widget end --> 
-                </div>
-                <!-- Gray Sidebar End --> 
+                    <!-- Gray Sidebar End -->
+                {% endblock %}
             </div>
         </div>
     </div>

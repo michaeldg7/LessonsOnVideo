@@ -10,8 +10,8 @@ def homepage(request, template_name="index.html"):
 
     **Context**
 
-        ''lessons''
-            A queryset of all 'lessons.VideoLesson' objects.
+        ''main_categories''
+            A queryset of all 'lessons.Category' objects having no parent.
 
         ''RequestContext
 
@@ -20,9 +20,9 @@ def homepage(request, template_name="index.html"):
         :template:'index.html'
 
     """
-    lessons = VideoLesson.objects.all()
+    main_categories = Category.objects.filter(parent__isnull=True)
     context = {
-        "lessons": lessons,
+        "main_categories": main_categories
     }
     return render_to_response(template_name, context, RequestContext(request))
 

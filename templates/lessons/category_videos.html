@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load i18n embed_video_tags lesson_tags %}
 
-{% block meta_title %}{% trans "Home" %}{% endblock %}
-{% block title %}{% trans "Home" %}{% endblock %}
+{% block meta_title %}Category | {{ category.title }}{% endblock %}
+{% block title %}Category | {{ category.title }}{% endblock %}
 
 {% block breadcrumb_menu %}
 <li>Category</li>
@@ -36,7 +36,7 @@
                                 <!-- Video Info End --> 
                             </figure>
                             <!-- Video Title Start -->
-                            <h4><a href="video-detail-double-sidebar.html">{{ lesson.title|truncatechars:45 }}</a></h4>
+                            <h4><a href="{% url 'video_detail' lesson.slug %}">{{ lesson.title|truncatechars:45 }}</a></h4>
                             <!-- Video Title End --> 
                         </div>
                         <!-- Video Box End --> 
