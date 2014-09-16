@@ -27,7 +27,7 @@
                     <div class="row"> 
                         <!-- Uploader Start -->
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 uploader">
-                            <figure> <a href="video-list.html"><img src="images/avatar2.jpg" alt="" /></a> </figure>
+                            <figure> <a href="video-list.html"><img src="{{ STATIC_URL }}theme/images/avatar.gif" alt="" /></a> </figure>
                             <div class="aboutuploader">
                                 <h5><a href="video-list.html">By {{ lesson.user.get_full_name }}</a></h5>
                                 <time datetime="25-12-2014">Uploaded : {{ lesson.uploaded_date|date:"d b Y" }}</time>
@@ -134,4 +134,68 @@
     </div>
     <!-- Contents Section End -->
     <div class="clearfix"></div>
+{% endblock %}
+
+{% block sidebar %}
+    <!-- Interactive Tabs Widget start -->
+    <div class="widget">
+        <div class="interactivetabs"> 
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="intertabs">
+                <li class="active"><a href="#abouttab" data-toggle="tab"><i class="fa fa-video-camera"></i>Videos</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- Video List Tab Start -->
+                <div class="tab-pane fade in active" id="abouttab">
+                    <div class="videolistsmall">
+                        <ul class="bloglist">
+                            <li>
+                                <div class="media">
+                                    <a href="video-detail-double-sidebar.html" class="pull-left">
+                                        <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img16.jpg" alt="" />
+                                    </a>
+                                    <div class="media-body">
+                                        <h5><a href="video-detail-double-sidebar.html">Dann Petty on Curabitur</a></h5>
+                                        <ul>
+                                            <li><i class="fa fa-clock-o"></i>10:56</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="media">
+                                    <a href="video-detail-double-sidebar.html" class="pull-left">
+                                        <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img17.jpg" alt="" />
+                                    </a>
+                                    <div class="media-body">
+                                        <h5><a href="video-detail-double-sidebar.html">Falling Down Focus</a></h5>
+                                        <ul>
+                                            <li><i class="fa fa-clock-o"></i>10:56</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="media">
+                                    <a href="video-detail-double-sidebar.html" class="pull-left">
+                                        <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img18.jpg" alt="" />
+                                    </a>
+                                    <div class="media-body">
+                                        <h5><a href="video-detail-double-sidebar.html">Waters Fourth Winged</a></h5>
+                                        <ul>
+                                            <li><i class="fa fa-clock-o"></i>10:56</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Video List Tab End -->
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <!-- Interactive Tabs Widget End --> 
 {% endblock %}
