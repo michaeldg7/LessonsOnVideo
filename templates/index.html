@@ -20,7 +20,7 @@
                                     <figure> 
                                         <!-- Video Thumbnail Start --> 
                                         <a href="{% url 'video_detail' lesson.slug %}">
-                                            <img src="{{ vid.thumbnail }}" class="img-responsive hovereffect" alt="" />
+                                            <img src="{{ vid.thumbnail }}" class="img-responsive hovereffect index-thumbnail" alt="" />
                                         </a> 
                                         <!-- Video Thumbnail End --> 
                                         <!-- Video Info Start -->
@@ -33,7 +33,7 @@
                                         <!-- Video Info End --> 
                                     </figure>
                                     <!-- Video Title Start -->
-                                    <h4><a href="{% url 'video_detail' lesson.slug %}">{{ lesson.title|truncatechars:45 }}</a></h4>
+                                    <h4><a href="{% url 'video_detail' lesson.slug %}">{{ lesson.title|truncatechars:30 }}</a></h4>
                                     <!-- Video Title End --> 
                                 </div>
                                 <!-- Video Box End --> 

@@ -2,6 +2,8 @@ import requests
 import gdata.youtube
 import gdata.youtube.service
 
+from datetime import datetime
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
@@ -46,7 +48,10 @@ class VideoLesson(OrderedModel):
     slug = models.SlugField(unique=True, blank=True, null=True)
     duration = models.PositiveIntegerField("Duration in Seconds", default=0)
     video = EmbedVideoField()
+    thumbnail = models.URLField(blank=True, null=True)
+    backend_source = models.CharField(max_length=64, blank=True, null=True)
     info = models.TextField(blank=True, null=True)
+    uploaded_date = models.DateTimeField(default=datetime.now())
 
     order_with_respect_to = 'category'
 
@@ -104,4 +109,6 @@ class VideoLesson(OrderedModel):
             self.title = info['title']
             self.slug = "%s-%s" % (self.id, slugify(self.title))
             self.duration = info['duration']
+            self.backend_source = backend.backend
+            self.thumbnail = backend.thumbnail
             self.save()
