@@ -1,8 +1,11 @@
+from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
 from lessons.models import VideoLesson, Category
+from lessons.social_apis import get_shares
 
 
 def homepage(request, template_name="index.html"):
@@ -46,8 +49,11 @@ def video_detail(request, video_slug, template_name="lessons/video.html"):
 
     """
     lesson = get_object_or_404(VideoLesson, slug=video_slug)
+    url = settings.SITE_FULL_DOMAIN + reverse("video_detail", args=(lesson.slug, ))
+    shares = get_shares(url)
     context = {
-        "lesson": lesson
+        "lesson": lesson,
+        "shares": shares
     }
     return render_to_response(template_name, context, RequestContext(request))
 

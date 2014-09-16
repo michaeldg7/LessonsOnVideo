@@ -40,7 +40,6 @@ def account_signup(request, template_name='accounts/signup.html'):
         "form": form
     }
     return render_to_response(template_name, context, RequestContext(request))
-    return render_to_response(template_name, context, RequestContext(request))
 
 
 def account_logout(request):
