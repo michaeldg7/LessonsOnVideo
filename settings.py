@@ -257,6 +257,7 @@ INSTALLED_APPS = (
     "ordered_model",
     "social.apps.django_app.default",
     "mptt",
+    "pageviews",
     # local apps
     "lessons",
 )
@@ -321,6 +322,7 @@ MIDDLEWARE_CLASSES = (
     # "mezzanine.core.middleware.SSLRedirectMiddleware",
     "mezzanine.pages.middleware.PageMiddleware",
     "mezzanine.core.middleware.FetchFromCacheMiddleware",
+    "pageviews.middleware.PageViewsMiddleware",
 )
 
 # Store these package names here as they may change in the future since

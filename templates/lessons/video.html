@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n embed_video_tags lesson_tags %}
+{% load i18n embed_video_tags lesson_tags pageviews_tags %}
 
 {% block meta_title %}Video | {{ lesson.title }}{% endblock %}
 {% block title %}Video | {{ lesson.title }}{% endblock %}
@@ -29,23 +29,23 @@
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 uploader">
                             <figure> <a href="video-list.html"><img src="images/avatar2.jpg" alt="" /></a> </figure>
                             <div class="aboutuploader">
-                                <h5><a href="video-list.html">By Kax Miller</a></h5>
-                                <time datetime="25-12-2014">Uploaded : 25 DEC 2014</time>
+                                <h5><a href="video-list.html">By {{ lesson.user.get_full_name }}</a></h5>
+                                <time datetime="25-12-2014">Uploaded : {{ lesson.uploaded_date|date:"d b Y" }}</time>
                                 <br />
-                                <a class="btn btn-primary btn-xs backcolor" href="#">Watch All Videos</a> </div>
+                                <!-- <a class="btn btn-primary btn-xs backcolor" href="#">Watch All Videos</a> --> </div>
                         </div>
                         <!-- Uploader End --> 
                         <!-- Video Stats Start -->
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats">
                             <hr class="visible-xs" />
                             <ul>
-                                <li class="likes">
+                                <!-- <li class="likes">
                                     <h5>Likes</h5>
                                     <h2>250</h2>
-                                </li>
+                                </li> -->
                                 <li class="views">
                                     <h5>Views</h5>
-                                    <h2>70K</h2>
+                                    <h2>{% pageviews %}</h2>
                                 </li>
                             </ul>
                         </div>
@@ -84,10 +84,10 @@
                 </div>
                 <!-- Video Stats and Sharing End --> 
                 <!-- Like This Video Start -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 likeit">
+                <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 likeit">
                     <hr />
                     <a class="btn btn-primary backcolor" href="#">Like This Video</a>
-                </div>
+                </div> -->
                 <!-- Like This Video Enb --> 
             </div>
         </div>
