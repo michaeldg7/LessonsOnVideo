@@ -108,7 +108,7 @@ def category_videos_ajax(request, category_slug, template_name="lessons/ajax/cat
 
     page = request.GET.get('page')
     try:
-        paginator = Paginator(lessons_list, 6)
+        paginator = Paginator(lessons_list, 9)
         lessons = paginator.page(page)
     except PageNotAnInteger:
         lessons = paginator.page(1)
