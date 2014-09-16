@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin
 
 from embed_video.admin import AdminVideoMixin
@@ -5,6 +6,19 @@ from mptt.admin import MPTTModelAdmin
 from ordered_model.admin import OrderedModelAdmin
 
 from lessons.models import Category, VideoLesson
+
+
+class VideoLessonAdminForm(forms.ModelForm):
+    class Meta:
+        model = VideoLesson
+
+    def __init__(self, *args, **kwds):
+        super(VideoLessonAdminForm, self).__init__(*args, **kwds)
+
+        related_videos = VideoLesson.objects.all()
+        if self.instance:
+            related_videos = related_videos.exclude(id=self.instance.id)
+        self.fields['related_videos'].queryset = related_videos
 
 
 class CategoryAdmin(MPTTModelAdmin):
@@ -21,9 +35,11 @@ class VideoLessonAdmin(AdminVideoMixin, OrderedModelAdmin):
     Admin view for :model:'lessons.VideoLesson' model
     """
     model = VideoLesson
+    form = VideoLessonAdminForm
 
     list_display = ('title', 'order', 'move_up_down_links')
     ordering = ('order', )
+    filter_horizontal = ('related_videos', )
 
     fieldsets = (
         ('Owner', {
@@ -31,6 +47,9 @@ class VideoLessonAdmin(AdminVideoMixin, OrderedModelAdmin):
         }),
         ('Video Info', {
             'fields': ('video', 'category')
+        }),
+        ('Related Videos/Products', {
+            'fields': ('related_videos', )
         }),
         )
 

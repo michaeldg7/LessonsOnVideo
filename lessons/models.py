@@ -51,6 +51,7 @@ class VideoLesson(OrderedModel):
     thumbnail = models.URLField(blank=True, null=True)
     backend_source = models.CharField(max_length=64, blank=True, null=True)
     info = models.TextField(blank=True, null=True)
+    related_videos = models.ManyToManyField("self", blank=True, null=True)
     uploaded_date = models.DateTimeField(default=datetime.now())
 
     order_with_respect_to = 'category'
@@ -67,6 +68,9 @@ class VideoLesson(OrderedModel):
     #     except:
     #         pass
     #     return info
+
+    def __unicode__(self):
+        return "%s" % (self.title, )
 
     def _generate_youtube_info(self, entry):
         author = entry.author[0].name.text if entry.author and entry.author[0] else ""

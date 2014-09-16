@@ -163,7 +163,22 @@
                 <div class="tab-pane fade in active" id="abouttab">
                     <div class="videolistsmall">
                         <ul class="bloglist">
-                            <li>
+                            {% for related in lesson.related_videos.all %}
+                                <li>
+                                    <div class="media">
+                                        <a href="{% url 'video_detail' related.slug %}" class="pull-left">
+                                            <img class="media-object img-responsive hovereffect" src="{{ related.thumbnail }}" alt="" />
+                                        </a>
+                                        <div class="media-body">
+                                            <h5><a href="{% url 'video_detail' related.slug %}">{{ related.title }}</a></h5>
+                                            <ul>
+                                                <li><i class="fa fa-clock-o"></i>{{ related.duration|convert_to_time }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            <!-- <li>
                                 <div class="media">
                                     <a href="video-detail-double-sidebar.html" class="pull-left">
                                         <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img16.jpg" alt="" />
@@ -201,7 +216,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
