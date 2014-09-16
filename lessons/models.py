@@ -1,3 +1,5 @@
+import os
+import decimal
 import requests
 import gdata.youtube
 import gdata.youtube.service
@@ -13,6 +15,24 @@ from embed_video.backends import detect_backend
 from embed_video.fields import EmbedVideoField
 from mptt.models import MPTTModel, TreeForeignKey
 from ordered_model.models import OrderedModel
+
+
+LEVEL_BEGINNER = 1
+LEVEL_INTERMEDIATE = 2
+LEVEL_ADVANCED = 3
+PRODUCT_LEVEL_CHOICES = [
+    (LEVEL_BEGINNER, "Beginner"),
+    (LEVEL_INTERMEDIATE, "Intermediate"),
+    (LEVEL_ADVANCED, "Advanced")
+]
+
+
+def get_image_path(instance, filename):
+    """
+    Dynamically set upload_to attribute of image fields.
+    """
+    classname = instance.__class__.__name__.lower()
+    return os.path.join('shop', classname, filename)
 
 
 class Category(MPTTModel):
@@ -115,4 +135,36 @@ class VideoLesson(OrderedModel):
             self.duration = info['duration']
             self.backend_source = backend.backend
             self.thumbnail = backend.thumbnail
+            self.save()
+
+
+class Product(models.Model):
+    """
+    Stores information about Product which will then be used in cartridge
+    """
+    title = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(unique=True, blank=True, null=True)
+    category = TreeForeignKey(Category)
+    image = models.ImageField(upload_to=get_image_path)
+    price = models.DecimalField(decimal_places=2, max_digits=7, default=decimal.Decimal('0.00'))
+    author = models.ForeignKey(User)
+    description = models.TextField()
+    level = models.PositiveIntegerField(choices=PRODUCT_LEVEL_CHOICES, default=LEVEL_BEGINNER)
+    approved = models.BooleanField(default=False)
+    approved_date = models.DateTimeField(blank=True, null=True)
+    creation_date = models.DateTimeField(default=datetime.now())
+    # TODO: Add excess/bonus items
+
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
+
+    def __unicode__(self):
+        return "%s" % (self.title, )
+
+    def save(self, *args, **kwargs):
+        super(Product, self).save(*args, **kwargs)
+
+        if not self.slug:
+            self.slug = slugify(self.title)
             self.save()
