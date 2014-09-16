@@ -11,6 +11,19 @@
 
 {% block video_content %}
     {% video lesson.video as vid %}
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({appId: '{{ APP_ID }}', status: true, cookie: true,
+            xfbml: true});
+            };
+            (function() {
+            var e = document.createElement('script'); e.async = true;
+            e.src = document.location.protocol +
+            '//connect.facebook.net/en_US/all.js';
+            document.getElementById('fb-root').appendChild(e);
+        }());
+    </script>
     <!-- Video Player Section Start -->
     <div class="videoplayersec">
         <div class="vidcontainer">
@@ -59,7 +72,7 @@
                                         <h5>{{ shares.facebook }}</h5>
                                         <p>Shares</p>
                                     </div>
-                                    <a href="http://www.facebook.com" class="link" target="_blank"></a>
+                                    <a href="javascript:;" class="link shareFacebook"></a>
                                 </li>
                                 <li class="twitter">
                                     <i class="fa fa-twitter"></i>
@@ -67,7 +80,7 @@
                                         <h5>{{ shares.twitter }}</h5>
                                         <p>Tweets</p>
                                     </div>
-                                    <a href="http://www.twitter.com" class="link" target="_blank"></a>
+                                    <a href="javascript:;" class="link shareTwitter"></a>
                                 </li>
                                 <li class="gplus">
                                     <i class="fa fa-google-plus"></i>
@@ -75,7 +88,7 @@
                                         <h5>{{ shares.google_plus }}</h5>
                                         <p>Shares</p>
                                     </div>
-                                    <a href="https://plus.google.com" class="link" target="_blank"></a>
+                                    <a href="javascript:;" class="link shareGooglePlus"></a>
                                 </li>
                             </ul>
                         </div>
@@ -198,4 +211,42 @@
     </div>
     <div class="clearfix"></div>
     <!-- Interactive Tabs Widget End --> 
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $('.shareFacebook').click(function(e){
+                e.preventDefault();
+                
+                var imgUrl = "{{ lesson.thumbnail }}";
+                var fbName = "{{ SITE_TITLE }}";
+                var caption = "{{ lesson.title }}";
+                var description = "{{ lesson.title }}"
+                FB.ui(
+                {
+                method: 'feed',
+                name: fbName,
+                link: window.location.href,
+                picture: imgUrl,
+                caption: caption,
+                description: description,
+                message: ''
+                });
+            });
+
+            $(".shareTwitter").click(function(e) {
+                e.preventDefault();
+                var twitterLink = "https://twitter.com/share?url=" + window.location.href;
+                window.open(twitterLink);
+            });
+
+            $(".shareGooglePlus").click(function(e) {
+                e.preventDefault();
+                var googlePlusLink = "https://plus.google.com/share?url=" + window.location.href;
+                window.open(googlePlusLink);
+            });
+        });
+    </script>
 {% endblock %}
