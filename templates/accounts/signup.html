@@ -39,6 +39,27 @@ Lessons On Video - Signup
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-primary backcolor">Sign Up</button>
+                    <div class="socialnetworks">
+                        <ul>
+                            <li> <strong>or signup using the following:</strong></li>
+                            <li>
+                                <a href="{% url 'social:begin' 'facebook' %}" data-toggle="tooltip" title="Facebook" data-placement="bottom" class="facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'social:begin' 'twitter' %}" data-toggle="tooltip" title="Twitter" data-placement="bottom" class="twitter">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'social:begin' 'google-oauth2' %}" data-toggle="tooltip" title="Google" data-placement="bottom" class="google">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
             </div>
         </form>
