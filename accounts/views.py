@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.core.urlresolvers import reverse
@@ -9,7 +8,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
 
-from accounts.forms import CustomUserCreationForm
+from accounts.forms import CustomUserCreationForm, LoginForm
 from accounts.models import RegistrationToken
 from accounts.utils import generate_random_str
 
@@ -20,12 +19,22 @@ def account_login(request, template_name='accounts/login.html'):
     """
     Displays the login screen and allows the user to login.
     """
-    form = AuthenticationForm()
+    form = LoginForm()
     if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
+        form = LoginForm(data=request.POST)
         if form.is_valid():
-            login(request, form.user_cache)
-            return HttpResponseRedirect(reverse("home"))
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password"]
+            auth_user = get_object_or_None(User, email=email)
+            if auth_user:
+                user = authenticate(username=auth_user.username, password=password)
+                if user is not None:
+                    if user.is_active:
+                        login(request, user)
+                        next = request.GET.get("next", None)
+                        if next:
+                            return HttpResponseRedirect(next)
+                        return HttpResponseRedirect(reverse('home'))
     context = {
         "form": form
     }
