@@ -259,7 +259,9 @@ INSTALLED_APPS = (
     "social.apps.django_app.default",
     "mptt",
     "pageviews",
+    "annoying",
     # local apps
+    "accounts",
     "lessons",
 )
 
@@ -282,6 +284,16 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'last_name', 'email']
+
+##################
+# EMAIL SETTINGS #
+##################
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'trolltrololol88@gmail.com'
+EMAIL_HOST_PASSWORD = '0Ks7BevE'
+EMAIL_PORT = 587
+EMAIL_FROM = "trolltrololol88@gmail.com"
 
 # List of processors used by RequestContext to populate the context.
 # Each one should be a callable that takes the request object as its

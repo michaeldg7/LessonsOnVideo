@@ -1,0 +1,8 @@
+Hello {{ user }},
+Thank you very much for signing up with LessonsOnVideo.
+
+Kindly click on the following link to activate your account:-
+{{ host }}{{ link }}
+
+Sincerely,
+LessonsOnVideo Team

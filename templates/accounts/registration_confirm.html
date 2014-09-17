@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block meta_title %}{% trans "Activate your account" %}{% endblock %}
+
+{% block breadcrumb_menu %}
+<li class="active">Confirm Registration</li>
+{% endblock %}
+
+{% block main %}
+    <!-- Contents Section Started -->
+    <div class="sections">
+        <h2 class="heading">Confirm Registration</h2>
+        <div class="clearfix"></div>
+        <div class="alert alert-info fade in">
+            <h4>Email Confirmation Sent</h4>
+            <p> Please check your email for the activation link. </p>
+        </div>
+    </div>
+    <!-- Contents Section End -->
+{% endblock %}
