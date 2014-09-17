@@ -35,6 +35,14 @@ def get_image_path(instance, filename):
     return os.path.join('shop', classname, filename)
 
 
+def get_file_path(instance, filename):
+    """
+    Dynamically set upload_to attribute of file fields.
+    """
+    classname = instance.__class__.__name__.lower()
+    return os.path.join('files', classname, filename)
+
+
 class Category(MPTTModel):
     """
     Stores information about Video Categories.
@@ -170,3 +178,18 @@ class Product(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
             self.save()
+
+
+class ProductFile(models.Model):
+    """
+    Stores Files related to Products
+    """
+    product = models.ForeignKey(Product)
+    file_item = models.FileField(upload_to=get_file_path)
+
+    class Meta:
+        verbose_name = "Product File"
+        verbose_name_plural = "Product Files"
+
+    def __unicode__(self):
+        return "%s" % (self.product.title, )

@@ -5,7 +5,7 @@ from embed_video.admin import AdminVideoMixin
 from mptt.admin import MPTTModelAdmin
 from ordered_model.admin import OrderedModelAdmin
 
-from lessons.models import Category, VideoLesson, Product
+from lessons.models import Category, VideoLesson, Product, ProductFile
 
 
 class VideoLessonAdminForm(forms.ModelForm):
@@ -61,12 +61,20 @@ class VideoLessonAdmin(AdminVideoMixin, OrderedModelAdmin):
     #     return readonly_fields
 
 
+class ProductFileInline(admin.StackedInline):
+    """
+    Inline view of ProductFile admin
+    """
+    model = ProductFile
+
+
 class ProductAdmin(admin.ModelAdmin):
     """
     Admin view for :model:'lessons.Product' model
     """
     model = Product
     prepopulated_fields = {"slug": ("title", )}
+    inlines = [ProductFileInline]
 
 
 admin.site.register(Category, CategoryAdmin)
