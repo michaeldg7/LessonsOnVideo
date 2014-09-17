@@ -66,6 +66,55 @@ class Category(MPTTModel):
             self.save()
 
 
+class Product(models.Model):
+    """
+    Stores information about Product which will then be used in cartridge
+    """
+    title = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(unique=True, blank=True, null=True)
+    category = TreeForeignKey(Category)
+    image = models.ImageField(upload_to=get_image_path)
+    price = models.DecimalField(decimal_places=2, max_digits=7, default=decimal.Decimal('0.00'))
+    admin_percentage = models.DecimalField(decimal_places=2, max_digits=7,
+        help_text="Percentage of the Price that goes to Admin", default=decimal.Decimal('0.00'))
+    author = models.ForeignKey(User)
+    description = models.TextField()
+    level = models.PositiveIntegerField(choices=PRODUCT_LEVEL_CHOICES, default=LEVEL_BEGINNER)
+    approved = models.BooleanField(default=False)
+    approved_date = models.DateTimeField(blank=True, null=True)
+    creation_date = models.DateTimeField(default=datetime.now())
+    # TODO: Add excess/bonus items
+
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
+
+    def __unicode__(self):
+        return "%s" % (self.title, )
+
+    def save(self, *args, **kwargs):
+        super(Product, self).save(*args, **kwargs)
+
+        if not self.slug:
+            self.slug = slugify(self.title)
+            self.save()
+
+
+class ProductFile(models.Model):
+    """
+    Stores Files related to Products
+    """
+    product = models.ForeignKey(Product)
+    file_item = models.FileField(upload_to=get_file_path)
+
+    class Meta:
+        verbose_name = "Product File"
+        verbose_name_plural = "Product Files"
+
+    def __unicode__(self):
+        return "%s" % (self.product.title, )
+
+
 class VideoLesson(OrderedModel):
     """
     Stores information about Video Lessons
@@ -80,6 +129,7 @@ class VideoLesson(OrderedModel):
     backend_source = models.CharField(max_length=64, blank=True, null=True)
     info = models.TextField(blank=True, null=True)
     related_videos = models.ManyToManyField("self", blank=True, null=True)
+    related_products = models.ManyToManyField(Product, blank=True, null=True)
     uploaded_date = models.DateTimeField(default=datetime.now())
 
     order_with_respect_to = 'category'
@@ -144,52 +194,3 @@ class VideoLesson(OrderedModel):
             self.backend_source = backend.backend
             self.thumbnail = backend.thumbnail
             self.save()
-
-
-class Product(models.Model):
-    """
-    Stores information about Product which will then be used in cartridge
-    """
-    title = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(unique=True, blank=True, null=True)
-    category = TreeForeignKey(Category)
-    image = models.ImageField(upload_to=get_image_path)
-    price = models.DecimalField(decimal_places=2, max_digits=7, default=decimal.Decimal('0.00'))
-    admin_percentage = models.DecimalField(decimal_places=2, max_digits=7,
-        help_text="Percentage of the Price that goes to Admin", default=decimal.Decimal('0.00'))
-    author = models.ForeignKey(User)
-    description = models.TextField()
-    level = models.PositiveIntegerField(choices=PRODUCT_LEVEL_CHOICES, default=LEVEL_BEGINNER)
-    approved = models.BooleanField(default=False)
-    approved_date = models.DateTimeField(blank=True, null=True)
-    creation_date = models.DateTimeField(default=datetime.now())
-    # TODO: Add excess/bonus items
-
-    class Meta:
-        verbose_name = "Product"
-        verbose_name_plural = "Products"
-
-    def __unicode__(self):
-        return "%s" % (self.title, )
-
-    def save(self, *args, **kwargs):
-        super(Product, self).save(*args, **kwargs)
-
-        if not self.slug:
-            self.slug = slugify(self.title)
-            self.save()
-
-
-class ProductFile(models.Model):
-    """
-    Stores Files related to Products
-    """
-    product = models.ForeignKey(Product)
-    file_item = models.FileField(upload_to=get_file_path)
-
-    class Meta:
-        verbose_name = "Product File"
-        verbose_name_plural = "Product Files"
-
-    def __unicode__(self):
-        return "%s" % (self.product.title, )
