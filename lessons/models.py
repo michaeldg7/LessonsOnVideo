@@ -147,6 +147,8 @@ class Product(models.Model):
     category = TreeForeignKey(Category)
     image = models.ImageField(upload_to=get_image_path)
     price = models.DecimalField(decimal_places=2, max_digits=7, default=decimal.Decimal('0.00'))
+    admin_percentage = models.DecimalField(decimal_places=2, max_digits=7,
+        help_text="Percentage of the Price that goes to Admin", default=decimal.Decimal('0.00'))
     author = models.ForeignKey(User)
     description = models.TextField()
     level = models.PositiveIntegerField(choices=PRODUCT_LEVEL_CHOICES, default=LEVEL_BEGINNER)
