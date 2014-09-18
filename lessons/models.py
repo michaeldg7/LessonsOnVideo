@@ -13,6 +13,7 @@ from django.template.defaultfilters import slugify
 
 from embed_video.backends import detect_backend
 from embed_video.fields import EmbedVideoField
+from mezzanine.generic.fields import CommentsField
 from mptt.models import MPTTModel, TreeForeignKey
 from ordered_model.models import OrderedModel
 
@@ -130,6 +131,7 @@ class VideoLesson(OrderedModel):
     info = models.TextField(blank=True, null=True)
     related_videos = models.ManyToManyField("self", blank=True, null=True)
     related_products = models.ManyToManyField(Product, blank=True, null=True)
+    comments = CommentsField()
     uploaded_date = models.DateTimeField(default=datetime.now())
 
     order_with_respect_to = 'category'

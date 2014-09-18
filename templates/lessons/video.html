@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n embed_video_tags lesson_tags pageviews_tags %}
+{% load i18n embed_video_tags lesson_tags pageviews_tags comment_tags %}
 
 {% block meta_title %}Video | {{ lesson.title }}{% endblock %}
 {% block title %}Video | {{ lesson.title }}{% endblock %}
@@ -141,6 +141,16 @@
                     <!-- Video Box End --> 
                 </div>
             {% endfor %}
+        </div>
+    </div>
+    <!-- Contents Section End -->
+    <div class="clearfix"></div>
+    <!-- Contents Section Started -->
+    <div class="sections">
+        <h2 class="heading">Comments:</h2>
+        <div class="clearfix"></div>
+        <div class="row">
+            {% comments_for lesson %}
         </div>
     </div>
     <!-- Contents Section End -->
