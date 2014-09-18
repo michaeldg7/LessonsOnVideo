@@ -295,6 +295,11 @@ EMAIL_HOST_PASSWORD = '0Ks7BevE'
 EMAIL_PORT = 587
 EMAIL_FROM = "trolltrololol88@gmail.com"
 
+####################
+# COMMENT SETTINGS #
+####################
+COMMENTS_USE_RATINGS = False
+
 # List of processors used by RequestContext to populate the context.
 # Each one should be a callable that takes the request object as its
 # only parameter and returns a dictionary to add to the context.
