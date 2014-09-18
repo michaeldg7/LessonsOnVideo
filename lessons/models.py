@@ -8,6 +8,7 @@ from datetime import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -196,3 +197,6 @@ class VideoLesson(OrderedModel):
             self.backend_source = backend.backend
             self.thumbnail = backend.thumbnail
             self.save()
+
+    def get_absolute_url(self):
+        return "%s%s" % (settings.SITE_FULL_DOMAIN, reverse('video_detail', args=(self.slug, )))
