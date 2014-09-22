@@ -69,10 +69,6 @@ urlpatterns += patterns('',
     # ``mezzanine.urls``, go right ahead and take the parts you want
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
-    # Cartridge URLs.
-    ("^shop/", include("cartridge.shop.urls")),
-    url("^account/orders/$", "cartridge.shop.views.order_history",
-        name="shop_order_history"),
 
     # Local URLS
     url(r'^accounts/', include('accounts.urls')),

@@ -241,7 +241,6 @@ INSTALLED_APPS = (
     "django.contrib.sites",
     "django.contrib.sitemaps",
     "django.contrib.staticfiles",
-    "cartridge.shop",  # cartridge's shop
     "mezzanine.boot",
     "mezzanine.conf",
     "mezzanine.core",
@@ -301,12 +300,6 @@ EMAIL_FROM = "trolltrololol88@gmail.com"
 ####################
 COMMENTS_USE_RATINGS = False
 
-######################
-# CARTRIDGE SETTINGS #
-######################
-SHOP_CHECKOUT_ACCOUNT_REQUIRED = True
-SHOP_USE_VARIATIONS = False
-
 # List of processors used by RequestContext to populate the context.
 # Each one should be a callable that takes the request object as its
 # only parameter and returns a dictionary to add to the context.
@@ -337,7 +330,6 @@ MIDDLEWARE_CLASSES = (
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "cartridge.shop.middleware.ShopMiddleware",
     "mezzanine.core.request.CurrentRequestMiddleware",
     "mezzanine.core.middleware.RedirectFallbackMiddleware",
     "mezzanine.core.middleware.TemplateForDeviceMiddleware",
