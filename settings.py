@@ -263,6 +263,7 @@ INSTALLED_APPS = (
     # local apps
     "accounts",
     "lessons",
+    "shop",
 )
 
 ########################
@@ -341,6 +342,7 @@ MIDDLEWARE_CLASSES = (
     "mezzanine.pages.middleware.PageMiddleware",
     "mezzanine.core.middleware.FetchFromCacheMiddleware",
     "pageviews.middleware.PageViewsMiddleware",
+    "lessonsonvideo.middleware.TimeOutMiddleware",
 )
 
 # Store these package names here as they may change in the future since
