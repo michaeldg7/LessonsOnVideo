@@ -265,7 +265,6 @@ INSTALLED_APPS = (
     # local apps
     "accounts",
     "lessons",
-    "shop",
 )
 
 ########################
