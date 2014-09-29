@@ -126,6 +126,8 @@ DEBUG = False
 
 # Whether a user's session cookie expires when the Web browser is closed.
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+SESSION_EXPIRY_MINUTES = 15
 
 SITE_ID = 1
 SITE_TITLE = "Lessons On Video"
