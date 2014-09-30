@@ -70,6 +70,9 @@ urlpatterns += patterns('',
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
 
+    # 3rd Party URLs
+    (r'^search/', include('haystack.urls')),
+
     # Local URLS
     url(r'^accounts/', include('accounts.urls')),
     url(r'^lessons/', include('lessons.urls')),

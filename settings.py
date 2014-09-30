@@ -262,6 +262,7 @@ INSTALLED_APPS = (
     "mptt",
     "pageviews",
     "annoying",
+    "haystack",
     # local apps
     "accounts",
     "lessons",
@@ -301,6 +302,16 @@ EMAIL_FROM = "trolltrololol88@gmail.com"
 # COMMENT SETTINGS #
 ####################
 COMMENTS_USE_RATINGS = False
+
+#####################
+# HAYSTACK SETTINGS #
+#####################
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
 
 # List of processors used by RequestContext to populate the context.
 # Each one should be a callable that takes the request object as its
