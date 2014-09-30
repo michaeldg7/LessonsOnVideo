@@ -57,7 +57,7 @@ class CustomMetaData(models.Model):
     class Meta:
         abstract = True
 
-class Category(MPTTModel):
+class Category(MPTTModel, CustomMetaData):
     """
     Stores information about Video Categories.
     """

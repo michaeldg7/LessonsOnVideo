@@ -29,6 +29,15 @@ class CategoryAdmin(MPTTModelAdmin):
     prepopulated_fields = {"slug": ("title", )}
     mptt_level_indent = 20
 
+    fieldsets = (
+        ('Info', {
+            'fields': ('title', 'slug', 'parent')
+        }),
+        ('Meta Data', {
+            'fields': ('meta_title', 'meta_description', 'keywords')
+        }),
+        )
+
 
 class VideoLessonAdmin(AdminVideoMixin, OrderedModelAdmin):
     """
