@@ -11,10 +11,11 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils.translation import ugettext_lazy as _
 
 from embed_video.backends import detect_backend
 from embed_video.fields import EmbedVideoField
-from mezzanine.generic.fields import CommentsField
+from mezzanine.generic.fields import CommentsField, KeywordsField
 from mptt.models import MPTTModel, TreeForeignKey
 from ordered_model.models import OrderedModel
 
@@ -44,6 +45,17 @@ def get_file_path(instance, filename):
     classname = instance.__class__.__name__.lower()
     return os.path.join('files', classname, filename)
 
+
+class CustomMetaData(models.Model):
+    """
+    Abstract model that provides meta data for content.
+    """
+    meta_title = models.CharField(max_length=255, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
+    keywords = KeywordsField(verbose_name=_("Keywords"))
+
+    class Meta:
+        abstract = True
 
 class Category(MPTTModel):
     """
@@ -117,7 +129,7 @@ class ProductFile(models.Model):
         return "%s" % (self.product.title, )
 
 
-class VideoLesson(OrderedModel):
+class VideoLesson(OrderedModel, CustomMetaData):
     """
     Stores information about Video Lessons
     """
@@ -196,6 +208,14 @@ class VideoLesson(OrderedModel):
             self.duration = info['duration']
             self.backend_source = backend.backend
             self.thumbnail = backend.thumbnail
+
+            # Assign Meta content
+            if not self.meta_description:
+                self.meta_description = info['description']
+
+            if not self.meta_title:
+                self.meta_title = info['title']
+
             self.save()
 
     def get_absolute_url(self):

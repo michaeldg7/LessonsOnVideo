@@ -16,11 +16,9 @@ class VideoLessonAdminForm(forms.ModelForm):
         super(VideoLessonAdminForm, self).__init__(*args, **kwds)
 
         related_videos = VideoLesson.objects.all()
-        approved_products = Product.objects.filter(approved=True)
         if self.instance:
             related_videos = related_videos.exclude(id=self.instance.id)
         self.fields['related_videos'].queryset = related_videos
-        self.fields['related_products'].queryset = approved_products
 
 
 class CategoryAdmin(MPTTModelAdmin):
@@ -41,7 +39,7 @@ class VideoLessonAdmin(AdminVideoMixin, OrderedModelAdmin):
 
     list_display = ('title', 'order', 'move_up_down_links')
     ordering = ('order', )
-    filter_horizontal = ('related_videos', 'related_products')
+    filter_horizontal = ('related_videos', )
 
     fieldsets = (
         ('Owner', {
@@ -50,8 +48,11 @@ class VideoLessonAdmin(AdminVideoMixin, OrderedModelAdmin):
         ('Video Info', {
             'fields': ('video', 'category')
         }),
-        ('Related Videos/Products', {
-            'fields': ('related_videos', 'related_products')
+        ('Related Videos', {
+            'fields': ('related_videos', )
+        }),
+        ('Meta Data', {
+            'fields': ('meta_title', 'meta_description', 'keywords')
         }),
         )
 
@@ -81,4 +82,4 @@ class ProductAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(VideoLesson, VideoLessonAdmin)
-admin.site.register(Product, ProductAdmin)
+# admin.site.register(Product, ProductAdmin)

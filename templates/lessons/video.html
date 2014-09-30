@@ -1,7 +1,15 @@
 {% extends "base.html" %}
-{% load i18n embed_video_tags lesson_tags pageviews_tags comment_tags %}
+{% load i18n embed_video_tags lesson_tags pageviews_tags comment_tags keyword_tags mezzanine_tags %}
 
 {% block meta_title %}Video | {{ lesson.title }}{% endblock %}
+{% block meta_description %}{{ lesson.meta_description }}{% endblock %}
+{% block meta_keywords %}{% metablock %}
+{% keywords_for lesson as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
 {% block title %}Video | {{ lesson.title }}{% endblock %}
 
 {% block breadcrumb_menu %}
