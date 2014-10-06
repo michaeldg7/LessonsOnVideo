@@ -212,7 +212,10 @@ class VideoLesson(OrderedModel, CustomMetaData):
 
             # Assign Meta content
             if not self.meta_description:
-                self.meta_description = info['description']
+                if info['description']:
+                    self.meta_description = info['description']
+                else:
+                    self.meta_description = info['title']
 
             if not self.meta_title:
                 self.meta_title = info['title']

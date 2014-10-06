@@ -178,9 +178,9 @@ def create_playlist_videos(request, template_name="lessons/create_playlist_video
                     error_msg = "Could not create video in URL: %s" % (url, )
                     messages.error(request, error_msg)
                     logger.info(msg)
-                success_msg = "Created %s video/videos." % (counter, )
-                messages.success(request, success_msg)
-                return HttpResponseRedirect(reverse('create_playlist_videos'))
+            success_msg = "Created %s video/s." % (counter, )
+            messages.success(request, success_msg)
+            return HttpResponseRedirect(reverse('create_playlist_videos'))
 
     context = {
         "form": form
