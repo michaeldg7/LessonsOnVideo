@@ -7,4 +7,5 @@ urlpatterns = patterns('lessons.views',
 
         url(r'^video/(?P<video_slug>.*\w+)/$', 'video_detail', name="video_detail"),
         url(r'^category/(?P<category_slug>.*\w+)/$', 'category_videos', name="category_videos"),
+        url(r'^videos/create/$', 'create_playlist_videos', name="create_playlist_videos"),
     )

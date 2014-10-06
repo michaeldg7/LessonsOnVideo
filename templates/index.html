@@ -12,7 +12,7 @@
                 <h2 class="heading">{{ category.title }}</h2>
                 <div class="clearfix"></div>
                 <div class="row">
-                    {% for lesson in category.get_children|get_videos_by_categories %}
+                    {% for lesson in category.get_children|get_videos_by_categories|slice:":12" %}
                         <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6"> 
                             <!-- Video Box Start -->
                             <div class="videobox2">

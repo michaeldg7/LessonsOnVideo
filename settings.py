@@ -313,6 +313,11 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
+##########################
+# URL EXTRACTOR SETTINGS #
+##########################
+YOUTUBE_URL_EXTRACTOR = "https://ayra.ch/service/youtube.php"
+
 # List of processors used by RequestContext to populate the context.
 # Each one should be a callable that takes the request object as its
 # only parameter and returns a dictionary to add to the context.

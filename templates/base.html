@@ -208,6 +208,9 @@
                     <div class="col-lg-2 col-md-3 col-sm-6 col-xs-8">
                         <div class="loginsec pull-right">
                             {% if request.user.is_authenticated %}
+                                {% if request.user.is_staff or request.user.is_superuser %}
+                                    <a href="{% url 'create_playlist_videos' %}" class="colorhover"><i class="fa fa-file"></i>Playlist Videos</a>
+                                {% endif %}
                                 <a href="{% url 'logout' %}" class="colorhover"><i class="fa fa-sign-out"></i>Logout</a>
                             {% else %}
                                 <a href="{% url 'login' %}" class="colorhover"><i class="fa fa-lock"></i>Login</a>
@@ -235,6 +238,20 @@
                         {% block breadcrumb_menu %}{% endblock %}
                     </ol>
                 </div>
+                {% if messages %}
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 equalcol conentsection">
+                        {% for message in messages %}
+                            <!-- Contents Section Started -->
+                            <div class="sections">
+                                <div class="alert alert-{% if message.tags != "debug" and message.tags != "error" %}{{ message.tags }}{% else %}danger{% endif %} fade in">
+                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                    <p>{{ message }}</p>
+                                </div>
+                            </div>
+                            <!-- Contents Section End --> 
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <!-- Bread Crumb End -->
                 {% block index_main %}
                 {% endblock %}
