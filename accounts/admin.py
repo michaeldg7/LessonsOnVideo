@@ -10,4 +10,4 @@ class RegistrationTokenAdmin(admin.ModelAdmin):
     model = RegistrationToken
 
 
-admin.site.register(RegistrationToken, RegistrationTokenAdmin)
+# admin.site.register(RegistrationToken, RegistrationTokenAdmin)
