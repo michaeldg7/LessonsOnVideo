@@ -27,7 +27,7 @@
     </div>
 {% endfor %}
 
-{% if lessons.has_next %}
+{% if lessons.has_next or lessons.has_previous %}
     <div class="clearfix"></div>
     <!-- Pagination Start -->
     <ul class="pagination">
