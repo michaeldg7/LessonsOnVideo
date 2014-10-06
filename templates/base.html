@@ -124,7 +124,7 @@
                     <!-- Logo Start -->
                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="logo">
-                            <a href="index.html"><img src="{{ STATIC_URL }}theme/images/logo.png" alt="Lessons On Video" /></a>
+                            <a href="{% url 'home' %}"><img src="{{ STATIC_URL }}theme/images/logo.png" alt="Lessons On Video" /></a>
                         </div>
                     </div>
                     <!-- Logo End -->
@@ -145,6 +145,7 @@
                         <figure class="header-adv">
                             <a href="#"><img src="{{ STATIC_URL }}theme/images/adv.gif" class="img-responsive" alt="Advertisment" /></a>
                         </figure>
+                        <!-- <iframe style="width:781px;height:97px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ss&ref=ss_til&ad_type=product_link&tracking_id=lc044-20&marketplace=amazon&region=US&placement=0307972100&asins=0307972100&linkId=I2YEN5GCSGSYXVTL&show_border=true&link_opens_in_new_window=true"> -->
                     </div>
                     <!-- Advertisment End -->
                 </div>
@@ -327,7 +328,9 @@
                         <div class="clearfix"></div>
                         <!-- Small Video Posts Widget End -->
                         <!-- Advertisement start -->
-                        <div class="widget"> <img src="{{ STATIC_URL }}theme/images/adv2.gif" class="img-responsive" alt=""> </div>
+                        <div class="widget"><!--  <img src="{{ STATIC_URL }}theme/images/adv2.gif" class="img-responsive" alt="">  -->
+                            {% block sidebar_ads %}{% endblock %}
+                        </div>
                         <div class="clearfix"></div>
                         <!-- Advertisement End --> 
                         <!-- Recent Post Widget start -->

@@ -71,3 +71,7 @@
     <!-- Contents Section End -->
     <div class="clearfix"></div>
 {% endblock %}
+
+{% block sidebar_ads %}
+    {{ category.ad_script|safe }}
+{% endblock %}

@@ -31,7 +31,7 @@ class CategoryAdmin(MPTTModelAdmin):
 
     fieldsets = (
         ('Info', {
-            'fields': ('title', 'slug', 'parent')
+            'fields': ('title', 'slug', 'parent', 'ad_script')
         }),
         ('Meta Data', {
             'fields': ('meta_title', 'meta_description', 'keywords')
