@@ -208,7 +208,7 @@
                     <div class="col-lg-2 col-md-3 col-sm-6 col-xs-8">
                         <div class="loginsec pull-right">
                             {% if request.user.is_authenticated %}
-                                {% if request.user.is_staff or request.user.is_superuser %}
+                                {% if request.user.is_staff %}
                                     <a href="{% url 'create_playlist_videos' %}" class="colorhover"><i class="fa fa-file"></i>Playlist Videos</a>
                                 {% endif %}
                                 <a href="{% url 'logout' %}" class="colorhover"><i class="fa fa-sign-out"></i>Logout</a>
