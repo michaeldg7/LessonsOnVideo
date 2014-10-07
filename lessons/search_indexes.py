@@ -5,6 +5,7 @@ from lessons.models import VideoLesson
 class VideoLessonIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     title = indexes.CharField(model_attr='title')
+    slug = indexes.CharField(model_attr='slug')
     slug_auto = indexes.EdgeNgramField(model_attr='slug')
     description = indexes.CharField(model_attr='meta_description')
     thumbnail = indexes.CharField(model_attr='thumbnail')

@@ -6,4 +6,3 @@
 local_settings.py
 media
 whoosh_index/*
-templates/search/indexes/*
