@@ -263,10 +263,21 @@ INSTALLED_APPS = (
     "pageviews",
     "annoying",
     "haystack",
+    "djcelery",
     # local apps
     "accounts",
     "lessons",
 )
+
+###################
+# CELERY SETTINGS #
+###################
+import djcelery
+djcelery.setup_loader()
+
+CELERY_RESULT_BACKEND = 'amqp'
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+CELERY_IMPORTS = ('lessons.tasks', )
 
 ########################
 # SOCIAL AUTH SETTINGS #

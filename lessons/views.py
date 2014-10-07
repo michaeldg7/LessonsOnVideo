@@ -1,7 +1,3 @@
-import re
-import requests
-import urllib
-
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
@@ -14,6 +10,7 @@ from django.template import RequestContext
 from lessons.forms import PlaylistForm
 from lessons.models import VideoLesson, Category
 from lessons.social_apis import get_shares
+from lessons.tasks import create_videos_via_playlist
 
 import logging
 logger = logging.getLogger('django')
@@ -155,31 +152,9 @@ def create_playlist_videos(request, template_name="lessons/create_playlist_video
         if form.is_valid():
             playlist_url = form.cleaned_data.get("url")
             category = form.cleaned_data.get("category")
-            values = {
-                "pid": playlist_url,
-                "API": 1,
-            }
-            data = urllib.urlencode(values)
-            full_url = "%s?%s" % (settings.YOUTUBE_URL_EXTRACTOR, data)
-            req = requests.get(full_url, verify=False)
-            urls = re.split('[\xef\xbb\xbf\r\n]', req.text)
-            urls = filter(None, urls)
 
-            counter = 0
-            for url in urls:
-                try:
-                    VideoLesson.objects.create(
-                        user=request.user,
-                        video=url,
-                        category=category
-                    )
-                    counter += 1
-                except:
-                    error_msg = "Could not create video in URL: %s" % (url, )
-                    messages.error(request, error_msg)
-                    logger.info(msg)
-            success_msg = "Created %s video/s." % (counter, )
-            messages.success(request, success_msg)
+            create_videos_via_playlist.delay(request.user, playlist_url, category)
+            messages.success(request, "The videos will be available in a couple of minutes.")
             return HttpResponseRedirect(reverse('create_playlist_videos'))
 
     context = {
