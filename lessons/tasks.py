@@ -1,4 +1,3 @@
-import re
 import requests
 import urllib
 
@@ -23,14 +22,11 @@ def create_videos_via_playlist(creator, playlist_url, category):
     }
     data = urllib.urlencode(values)
     full_url = "%s?%s" % (settings.YOUTUBE_URL_EXTRACTOR, data)
-    req = requests.get(full_url, verify=False, timeout=600)
-    response = req.text
-    urls = re.split('[\xef\xbb\xbf\r\n]', response)
-    urls = filter(None, urls)
+    req = requests.get(full_url, verify=False, timeout=300)
 
     counter = 0
-    logger.info(">>>>> Start creating %s videos" % (len(urls), ))
-    for url in urls:
+    logger.info(">>>>> Start creating videos")
+    for url in req.iter_lines():
         try:
             VideoLesson.objects.create(
                 user=creator,
