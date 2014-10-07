@@ -28,7 +28,9 @@ def create_videos_via_playlist(creator, playlist_url, category):
     counter = 0
     logger.info(">>>>> Start creating videos")
     remove_list = []
-    for url in req.iter_lines():
+    for index, url in enumerate(req.iter_lines()):
+        if index == 0:
+            url = url.replace("\xef\xbb\xbf", "")
         try:
             lesson = VideoLesson()
             lesson.user = creator
