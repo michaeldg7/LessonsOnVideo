@@ -46,7 +46,7 @@ class VideoLessonAdmin(AdminVideoMixin, OrderedModelAdmin):
     model = VideoLesson
     form = VideoLessonAdminForm
 
-    list_display = ('title', 'order', 'move_up_down_links')
+    list_display = ('title', 'category', 'order', 'move_up_down_links')
     ordering = ('order', )
     filter_horizontal = ('related_videos', )
 
