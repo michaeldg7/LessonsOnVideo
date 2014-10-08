@@ -250,6 +250,17 @@
     <!-- Interactive Tabs Widget End --> 
 {% endblock %}
 
+{% block sidebar_ads %}
+    {% for ad in lesson.category.get_ads %}
+        <!-- Advertisement start -->
+        <div class="widget">
+            {{ ad.ad_script|safe }}
+        </div>
+        <div class="clearfix"></div>
+        <!-- Advertisement End -->
+    {% endfor %}
+{% endblock %}
+
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function(){

@@ -80,6 +80,9 @@ class Category(MPTTModel, CustomMetaData):
             self.slug = '%s' % (slugify(self.title), )
             self.save()
 
+    def get_ads(self):
+        return self.advertisement_set.all()
+
 
 class Advertisement(models.Model):
     """

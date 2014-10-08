@@ -73,7 +73,14 @@
 {% endblock %}
 
 {% block sidebar_ads %}
-    {{ category.ad_script|safe }}
+    {% for ad in category.get_ads %}
+        <!-- Advertisement start -->
+        <div class="widget">
+            {{ ad.ad_script|safe }}
+        </div>
+        <div class="clearfix"></div>
+        <!-- Advertisement End -->
+    {% endfor %}
 {% endblock %}
 
 {% block ad_top_banner %}

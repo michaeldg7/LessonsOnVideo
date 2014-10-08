@@ -44,13 +44,12 @@
     <!-- Header Start -->
     <header>
         <!-- Header Top Strip Start -->
-        <div class="topstrip">
+        <!-- <div class="topstrip">
             <div class="custom-container">
-                <div class="row">
+                <div class="row"> -->
                     <!-- Top Categories Start -->
-                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-6">
+                    <!-- <div class="col-lg-10 col-md-10 col-sm-8 col-xs-6">
                         <div class="topcategories">
-                            <!-- navbar Start -->
                             <div class="navbar yamm navbar-default">
                                 <div class="navbar-header">
                                     <button type="button" data-toggle="collapse" data-target="#navbar-collapse-2" class="navbar-toggle">
@@ -72,12 +71,12 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- Top Categories End -->
                     <!-- Social Network Start -->
-                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+                    <!-- <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
                         <div class="socialnetworks">
-                            <ul class="pull-right">
+                            <ul class="pull-right"> -->
                                 <!-- <li>
                                     <a href="{% url 'social:begin' 'facebook' %}" data-toggle="tooltip" title="Facebook" data-placement="bottom" class="facebook">
                                         <i class="fa fa-facebook"></i>
@@ -108,14 +107,14 @@
                                         <i class="fa fa-pinterest"></i>
                                     </a>
                                 </li> -->
-                            </ul>
+                            <!-- </ul>
                             <div class="clearfix"></div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- Social Network End -->
-                </div>
+                <!-- </div>
             </div>
-        </div>
+        </div> -->
         <!-- Header Top Strip End -->
         <!-- Logo + Search + Advertisment Start -->
         <div class="logobar">
@@ -264,114 +263,7 @@
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 equalcol graysidebar">
                         {% block sidebar %}
                         {% endblock %}
-                        <!-- Calendar Widget start -->
-                        <div class="widget">
-                            <div class="calendar">
-                                <div id="datepicker"></div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <!-- Calendar Widget End --> 
-                        <!-- Comments Widget start -->
-                        <div class="widget">
-                            <h2 class="heading">Comments</h2>
-                            <div class="commentslist">
-                                <ul>
-                                    <li><a href="blogdetail-double-sidebar.html">Dolor. Proin. Sit rhoncus ut odio nascetur mus a placerat</a></li>
-                                    <li>
-                                        <a href="blogdetail-double-sidebar.html">
-                                            Etiam, aliquet a tempor arcu, nisi. Lundium turpis platea? In vel auctor tincidunt, eros dignissim vel, porttitor hac eros! Augue pid? Tortor urna et natoque, sociis.
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="blogdetail-double-sidebar.html">
-                                            Turpis cum, in elementum elit. Placerat, porta sagittis. Pulvinar, elementum ac, lectus parturient.
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <!-- Comments Widget End -->
-                        <!-- Small Video Posts Widget start -->
-                        <div class="widget">
-                            <h2 class="heading">Music</h2>
-                            <div class="videolistsmall">
-                                <ul class="bloglist">
-                                    <li>
-                                        <div class="media">
-                                            <a href="video-detail-double-sidebar.html" class="pull-left">
-                                                <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img16.jpg" alt="" />
-                                            </a>
-                                            <div class="media-body">
-                                                <h5><a href="video-detail-double-sidebar.html">Dann Petty on Curabitur</a></h5>
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>10:56</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media">
-                                            <a href="video-detail-double-sidebar.html" class="pull-left">
-                                                <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img17.jpg" alt="" />
-                                            </a>
-                                            <div class="media-body">
-                                                <h5><a href="video-detail-double-sidebar.html">Falling Down Focus</a></h5>
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>10:56</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media">
-                                            <a href="video-detail-double-sidebar.html" class="pull-left">
-                                                <img class="media-object img-responsive hovereffect" src="{{ STATIC_URL }}theme/images/img18.jpg" alt="" />
-                                            </a>
-                                            <div class="media-body">
-                                                <h5><a href="video-detail-double-sidebar.html">Waters Fourth Winged</a></h5>
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>10:56</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <!-- Small Video Posts Widget End -->
-                        <!-- Advertisement start -->
-                        <div class="widget"><!--  <img src="{{ STATIC_URL }}theme/images/adv2.gif" class="img-responsive" alt="">  -->
-                            {% block sidebar_ads %}{% endblock %}
-                        </div>
-                        <div class="clearfix"></div>
-                        <!-- Advertisement End --> 
-                        <!-- Recent Post Widget start -->
-                        <div class="widget">
-                            <h2 class="heading">Recent Posts</h2>
-                            <ul class="recentposts">
-                                <li>
-                                    <h5><a href="blogdetail-double-sidebar.html">Dolor. Proin. Sit rhoncus ut odio nascetur</a></h5>
-                                    <p class="date">25 April 2013</p>
-                                </li>
-                                <li>
-                                    <h5><a href="blogdetail-double-sidebar.html"> Urna nec, cursus, dictumst! Etiam</a></h5>
-                                    <p class="date">01 May 2013</p>
-                                </li>
-                                <li>
-                                    <h5><a href="blogdetail-double-sidebar.html">Lundium turpis platea? In vel auctor tincidunt</a></h5>
-                                    <p class="date">25 April 2013</p>
-                                </li>
-                                <li>
-                                    <h5><a href="blogdetail-double-sidebar.html">Pulvinar, elementum ac, lectus parturient.</a></h5>
-                                    <p class="date">01 May 2013</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="clearfix"></div>
-                        <!-- Recent Post Widget end --> 
+                        {% block sidebar_ads %}{% endblock %}
                     </div>
                     <!-- Gray Sidebar End -->
                 {% endblock %}
@@ -388,7 +280,7 @@
                     <div class="widget">
                         <div class="text-widget">
                             <div class="textsec">
-                                <a href="index.html"><img src="{{ STATIC_URL }}theme/images/logo.png" alt=""></a>
+                                <a href="{% url 'home' %}"><img src="{{ STATIC_URL }}theme/images/logo.png" alt=""></a>
                                 <br /><br />
                                 <!-- <p>
                                     Ut volutpat consectetur aliquam. Curabitur auctor in nis ulum ornare. Sed consequat, augue condimentum fermentum gravida, metus elit vehicula dui.
@@ -461,7 +353,7 @@
                 <div class="col-lg-10 col-md-10 col-sm-9 .col-xs-9">
                     <p class="copyrights">© 2014. All rights reserved.</p>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-3 .col-xs-3">
+                <!-- <div class="col-lg-2 col-md-2 col-sm-3 .col-xs-3">
                     <div class="socialnetworks">
                         <ul class="pull-right">
                             <li><a href="#" data-toggle="tooltip" title="Facebook" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -472,7 +364,7 @@
                         </ul>
                         <div class="clearfix"></div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </footer>
