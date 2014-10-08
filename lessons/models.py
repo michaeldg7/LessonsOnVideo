@@ -137,7 +137,7 @@ class VideoLesson(OrderedModel, CustomMetaData):
     user = models.ForeignKey(User)
     category = TreeForeignKey(Category)
     title = models.CharField(max_length=255, blank=True, null=True)
-    slug = models.SlugField(unique=True, blank=True, null=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
     duration = models.PositiveIntegerField("Duration in Seconds", default=0)
     video = EmbedVideoField()
     thumbnail = models.URLField(blank=True, null=True)
@@ -205,7 +205,9 @@ class VideoLesson(OrderedModel, CustomMetaData):
             info.update({"thumbnail": backend.thumbnail})
             self.info = info
             self.title = info['title']
-            self.slug = "%s-%s" % (self.id, slugify(self.title))
+            slug = "%s-%s" % (self.id, slugify(self.title))
+            slug = slug[:-1] if slug[-1] == "-" else slug
+            self.slug = slug
             self.duration = info['duration']
             self.backend_source = backend.backend
             self.thumbnail = backend.thumbnail

@@ -15,3 +15,8 @@
     top: 50%;
     left: 47%;
 }
+
+.videolistsmall {
+    height: 340px;
+    overflow-y: scroll;
+}
