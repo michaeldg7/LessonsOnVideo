@@ -64,6 +64,7 @@ class Category(MPTTModel, CustomMetaData):
     parent = TreeForeignKey("self", blank=True, null=True, related_name='children')
     title = models.CharField(max_length=64, unique=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
+    ad_top = models.TextField(blank=True, null=True, help_text="Ad script for the top banner")
 
     class Meta:
         verbose_name = "Category"

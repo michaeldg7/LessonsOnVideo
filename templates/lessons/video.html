@@ -117,6 +117,16 @@
     {% endvideo %}
 {% endblock %}
 
+{% block ad_top_banner %}
+    {% if lesson.category.ad_top %}
+        {{ lesson.category.ad_top|safe }}
+    {% else %}
+        <figure class="header-adv">
+            <a href="#"><img src="{{ STATIC_URL }}theme/images/adv.gif" class="img-responsive" alt="Advertisment" /></a>
+        </figure>
+    {% endif %}
+{% endblock %}
+
 {% block main %}
     <!-- Contents Section Started -->
     <div class="sections">
