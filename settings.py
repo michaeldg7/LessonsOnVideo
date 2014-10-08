@@ -264,6 +264,7 @@ INSTALLED_APPS = (
     "annoying",
     "haystack",
     "djcelery",
+    "disqus",
     # local apps
     "accounts",
     "lessons",
@@ -298,6 +299,12 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'last_name', 'email']
+
+###################
+# DISQUS SETTINGS #
+###################
+DISQUS_API_KEY = ''
+DISQUS_WEBSITE_SHORTNAME = ''
 
 ##################
 # EMAIL SETTINGS #
