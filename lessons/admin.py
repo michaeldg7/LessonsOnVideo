@@ -5,7 +5,7 @@ from embed_video.admin import AdminVideoMixin
 from mptt.admin import MPTTModelAdmin
 from ordered_model.admin import OrderedModelAdmin
 
-from lessons.models import Category, VideoLesson, Product, ProductFile
+from lessons.models import Category, VideoLesson, Product, ProductFile, Advertisement
 
 
 class VideoLessonAdminForm(forms.ModelForm):
@@ -21,6 +21,14 @@ class VideoLessonAdminForm(forms.ModelForm):
         self.fields['related_videos'].queryset = related_videos
 
 
+class AdvertisementInline(admin.StackedInline):
+    """
+    Inline view of Advertisement admin
+    """
+    model = Advertisement
+    extra = 4
+
+
 class CategoryAdmin(MPTTModelAdmin):
     """
     Admin view for :model:'lessons.Category' model
@@ -28,10 +36,11 @@ class CategoryAdmin(MPTTModelAdmin):
     model = Category
     prepopulated_fields = {"slug": ("title", )}
     mptt_level_indent = 20
+    inlines = [AdvertisementInline]
 
     fieldsets = (
         ('Info', {
-            'fields': ('title', 'slug', 'parent', 'ad_script')
+            'fields': ('title', 'slug', 'parent')
         }),
         ('Meta Data', {
             'fields': ('meta_title', 'meta_description', 'keywords')

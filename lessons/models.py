@@ -64,7 +64,6 @@ class Category(MPTTModel, CustomMetaData):
     parent = TreeForeignKey("self", blank=True, null=True, related_name='children')
     title = models.CharField(max_length=64, unique=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
-    ad_script = models.TextField(blank=True, null=True)
 
     class Meta:
         verbose_name = "Category"
@@ -79,6 +78,18 @@ class Category(MPTTModel, CustomMetaData):
         if not self.slug:
             self.slug = '%s' % (slugify(self.title), )
             self.save()
+
+
+class Advertisement(models.Model):
+    """
+    Contains ad script of a particular :model:'lessons.Category' instance.
+    """
+    category = TreeForeignKey(Category)
+    ad_script = models.TextField()
+
+    class Meta:
+        verbose_name = "Advertisement"
+        verbose_name_plural = "Advertisements"
 
 
 class Product(models.Model):
