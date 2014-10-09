@@ -179,7 +179,7 @@
                                             {% recursetree CATEGORIES %}
                                                 <!-- Home Page Styles Start -->
                                                 <li class="dropdown">
-                                                    <a href="{% url 'home' %}" {% if not node.is_leaf_node %}data-toggle="dropdown" class="dropdown-toggle"{% endif %}>{{ node.title }}</a>
+                                                    <a href="{% if not node.is_leaf_node %}{% url 'home' %}{% else %}{% url 'category_videos' node.slug %}{% endif %}" {% if not node.is_leaf_node %}data-toggle="dropdown" class="dropdown-toggle"{% endif %}>{{ node.title }}</a>
                                                     {% if not node.is_leaf_node %}
                                                         <ul class="dropdown-menu">
                                                             <li>
