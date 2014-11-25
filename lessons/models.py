@@ -213,17 +213,23 @@ class VideoLesson(OrderedModel, CustomMetaData):
             if backend.backend == "VimeoBackend":
                 info = backend.info
             elif backend.backend == "YoutubeBackend":
-               info = self._get_youtube_info(backend)
-               info.update({"id": backend.code})
+                entry = kwargs.get('entry', None)
+                if entry:
+                    info = self._generate_youtube_info(entry)
+                else:
+                    info = self._get_youtube_info(backend)
+                info.update({"id": backend.code})
 
             info.update({"backend": backend.backend})
             info.update({"thumbnail": backend.thumbnail})
             self.info = info
-            self.title = info['title']
+            if not self.title:
+                self.title = info['title']
             slug = "%s-%s" % (self.id, slugify(self.title))
             slug = slug[:-1] if slug[-1] == "-" else slug
             self.slug = slug
-            self.duration = info['duration']
+            if not self.duration:
+                self.duration = info['duration']
             self.backend_source = backend.backend
             self.thumbnail = backend.thumbnail
 

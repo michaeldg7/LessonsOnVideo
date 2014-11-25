@@ -1,9 +1,12 @@
 import requests
 import urllib
+import json
 
 from django.conf import settings
 
 from lessons.models import VideoLesson
+
+from gdata.youtube import service
 
 from celery import task
 from celery.decorators import periodic_task
@@ -14,36 +17,56 @@ import logging
 logger = logging.getLogger('django')
 
 
+def create_lesson(creator, item, category, counter, remove_list):
+    url = item.link[0].href.replace('&feature=youtube_gdata', '')
+    try:
+        lesson = VideoLesson()
+        lesson.user = creator
+        lesson.video = url
+        lesson.title = item.media.title.text
+        lesson.meta_title = item.media.title.text
+        lesson.meta_description = item.media.description.text
+        lesson.duration = item.media.duration.seconds
+        lesson.category = category
+        lesson.save(*{'entry': item})
+        counter += 1
+    except:
+        remove_list.append(url)
+        logger.info(">>>>> Could not create video in URL: {}".format(url))
+    return counter, remove_list
+
+
 @task
 def create_videos_via_playlist(creator, playlist_url, category):
     """
     Task to create :model:'lessons.VideoLesson' objects using the parameters given
     """
-    values = {
-        "pid": playlist_url,
-        "API": 1,
-    }
-    data = urllib.urlencode(values)
-    full_url = "%s?%s" % (settings.YOUTUBE_URL_EXTRACTOR, data)
-    req = requests.get(full_url, verify=False, timeout=300)
-
-    counter = 0
-    logger.info(">>>>> Start creating videos")
     remove_list = []
-    for index, url in enumerate(req.iter_lines()):
-        if index == 0:
-            url = url.replace("\xef\xbb\xbf", "")
-        try:
-            lesson = VideoLesson()
-            lesson.user = creator
-            lesson.video = url
-            lesson.category = category
-            lesson.save()
-            counter += 1
-        except:
-            error_msg = ">>>>> Could not create video in URL: %s" % (url, )
-            remove_list.append(url)
-            logger.info(error_msg)
+    counter = 0
+
+    yt_service = service.YouTubeService()
+    yt_service.ssl = True
+    yt_service.developer_key = settings.GOOGLE_DEVELOPER_KEY
+    yt_service.client_id = settings.GOOGLE_CLIENT_ID
+
+    logger.info(">>>>> Start creating videos")
+
+    if '?v=' in playlist_url:
+        item = yt_service.GetYouTubeVideoEntry(
+            video_id=playlist_url.split('?v=')[1])
+        counter, remove_list = create_lesson(
+            creator, item, category, counter, remove_list)
+
+    if '?list=' in playlist_url:
+        full_url = "{}/playlists/{}".format(settings.YOUTUBE_URL_EXTRACTOR,
+            url_type, playlist_url.split('?list=')[1])
+        response = yt_service.GetYouTubePlaylistVideoFeed(uri=full_url)
+
+        while response:
+            for item in response.entry:
+                counter, remove_list = create_lesson(
+                    creator, item, category, counter, remove_list)
+            response = yt_service.GetNext(response)
 
     VideoLesson.objects.filter(video__in=remove_list).delete()  # Hack to remove URLs that throws exception
     logger.info(">>>>> Successfully Created %s video/s." % (counter, ))
@@ -54,3 +77,4 @@ def create_videos_via_playlist(creator, playlist_url, category):
 def update_lessons_index():
     logger.info("[Haystack] Updating lessons index...")
     update_index.Command().handle('lessons', remove=True)
+

@@ -334,7 +334,8 @@ HAYSTACK_CONNECTIONS = {
 ##########################
 # URL EXTRACTOR SETTINGS #
 ##########################
-YOUTUBE_URL_EXTRACTOR = "https://ayra.ch/service/youtube.php"
+#YOUTUBE_URL_EXTRACTOR = "https://ayra.ch/service/youtube.php"
+YOUTUBE_URL_EXTRACTOR = "http://gdata.youtube.com/feeds/api"
 
 # List of processors used by RequestContext to populate the context.
 # Each one should be a callable that takes the request object as its
@@ -352,7 +353,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "mezzanine.pages.context_processors.page",
     "social.apps.django_app.context_processors.backends",
     "social.apps.django_app.context_processors.login_redirect",
-    "lessonsonvideo.context_processors.get_categories",
+    "context_processors.get_categories",
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
@@ -377,7 +378,7 @@ MIDDLEWARE_CLASSES = (
     "mezzanine.pages.middleware.PageMiddleware",
     "mezzanine.core.middleware.FetchFromCacheMiddleware",
     "pageviews.middleware.PageViewsMiddleware",
-    "lessonsonvideo.middleware.TimeOutMiddleware",
+    "middleware.TimeOutMiddleware",
 )
 
 # Store these package names here as they may change in the future since
