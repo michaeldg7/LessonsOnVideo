@@ -12,7 +12,8 @@ def get_facebook_shares(link=None):
         facebook_api = "https://api.facebook.com/method/links.getStats?urls=%s&format=json" % (link, )
         url = urllib2.urlopen(facebook_api).read()
         content = json.loads(url)
-        shares = content[0]['share_count']
+        if content:
+            shares = content[0]['share_count']
     return shares
 
 
@@ -22,10 +23,13 @@ def get_twitter_tweets(link=None):
     """
     tweets = 0
     if link:
-        twitter_api = "http://urls.api.twitter.com/1/urls/count.json?url=%s" % (link, )
-        url = urllib2.urlopen(twitter_api).read()
-        content = json.loads(url)
-        tweets = content['count']
+        try:
+            twitter_api = "http://urls.api.twitter.com/1/urls/count.json?url=%s" % (link, )
+            url = urllib2.urlopen(twitter_api).read()
+            content = json.loads(url)
+            tweets = content['count']
+        except:
+            pass
     return tweets
 
 
