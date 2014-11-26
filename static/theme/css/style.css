@@ -645,6 +645,7 @@ header.style2 .searchbox input[type="text"]:-ms-input-placeholder {
 	padding-top: 10px;
 	width: 100%;
 	float: left;
+	min-height: 50px;
 }
 .videobox2 .vidopts ul{
 	width:100%;
