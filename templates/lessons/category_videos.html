@@ -39,7 +39,11 @@
                 $(".lessons-div").html(result);
                 assignPaginateEvent();
                 $(".preLoader").hide();
-                $(".lessons-div").fadeIn();
+                $(".lessons-div").fadeIn({
+                    duration: 400,
+                    progress: function() {
+                        jQuery('.equalcol').responsiveEqualHeightGrid();
+                }});
             }
         });
     }
