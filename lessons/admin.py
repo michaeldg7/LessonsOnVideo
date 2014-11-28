@@ -58,6 +58,7 @@ class VideoLessonAdmin(AdminVideoMixin, OrderedModelAdmin):
     list_display = ('title', 'category', 'order', 'move_up_down_links')
     ordering = ('order', )
     filter_horizontal = ('related_videos', )
+    list_filter = ('category__title',)
 
     fieldsets = (
         ('Owner', {
