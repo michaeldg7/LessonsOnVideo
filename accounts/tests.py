@@ -1,20 +1,17 @@
 import re
 
-from django.test import TestCase
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.core import mail
 
 from django_webtest import WebTest
-from django_dynamic_fixture import G, F
+from django_dynamic_fixture import G
 
 
 class AccountTest(WebTest):
     user_name = 'test_user'
     email = 'test_user@example.com'
     password = 'password'
-    hash_key = '387cde0a5d2aecb281fe6da4f691f749'
-    wrong_hash_key = '387cde0a5d2aecb281fe6da4f691f74a'
 
     def setUp(self):
         super(AccountTest, self).setUp()

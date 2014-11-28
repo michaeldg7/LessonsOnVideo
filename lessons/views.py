@@ -1,3 +1,5 @@
+import sys
+
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
@@ -153,7 +155,12 @@ def create_playlist_videos(request, template_name="lessons/create_playlist_video
             playlist_url = form.cleaned_data.get("url")
             category = form.cleaned_data.get("category")
 
-            create_videos_via_playlist.delay(request.user, playlist_url, category)
+            if 'test' in sys.argv:
+                create_videos_via_playlist.run(request.user, playlist_url,
+                                               category)
+            else:
+                create_videos_via_playlist.delay(request.user, playlist_url,
+                                                 category)
             messages.success(request, "The videos will be available in a couple of minutes.")
             return HttpResponseRedirect(reverse('create_playlist_videos'))
 

@@ -479,5 +479,18 @@
         "tree_id": 5, 
         "slug": "wordpress"
     }
+},
+{
+    "pk": 38, 
+    "model": "lessons.category", 
+    "fields": {
+        "rght": 23, 
+        "parent": null, 
+        "title": "Business", 
+        "level": 0, 
+        "lft": 22, 
+        "tree_id": 7, 
+        "slug": "business"
+    }
 }
 ]
