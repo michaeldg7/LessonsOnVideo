@@ -23,7 +23,7 @@ Lessons On Video - Login
                 </ul>
             </div>
         {% endif %}
-        <form class="form-horizontal" role="form" method="POST">
+        <form id="login-form" class="form-horizontal" role="form" method="POST">
             {% csrf_token %}
             {% for field in form %}
                 <div class="form-group {% if field.errors %}has-error has-feedback{% endif %}">

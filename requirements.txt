@@ -16,11 +16,13 @@ certifi==14.05.14
 django-annoying==0.8.0
 django-celery==3.1.16
 django-disqus==0.4.3
+django-dynamic-fixture==1.6.4
 django-embed-video==0.11
 django-haystack==2.3.1
 django-mptt==0.6.1
 django-ordered-model==0.4.0
 git+git://github.com/renyi/django-pageviews.git
+django-webtest==1.7.6
 filebrowser-safe==0.3.6
 future==0.9.0
 gdata==2.0.18
@@ -37,5 +39,6 @@ requests==2.4.1
 requests-oauthlib==0.4.1
 six==1.8.0
 tzlocal==1.0
+webtest==2.0.14
 wsgiref==0.1.2
 xhtml2pdf==0.0.6
