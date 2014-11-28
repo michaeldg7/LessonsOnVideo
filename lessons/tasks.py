@@ -59,7 +59,7 @@ def create_videos_via_playlist(creator, playlist_url, category):
 
     if '?list=' in playlist_url:
         full_url = "{}/playlists/{}".format(settings.YOUTUBE_URL_EXTRACTOR,
-            url_type, playlist_url.split('?list=')[1])
+                                            playlist_url.split('?list=')[1])
         response = yt_service.GetYouTubePlaylistVideoFeed(uri=full_url)
 
         while response:
