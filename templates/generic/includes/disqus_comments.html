@@ -4,7 +4,7 @@
 {% disqus_sso_script %}
 <script>
     var disqus_developer = '{{ settings.DEV_SERVER }}' == 'True';
-    var disqus_url = '{{ object_for_comments.get_absolute_url }}';
+    var disqus_url = '{% if "http" in object_for_comments.get_absolute_url %}{{ object_for_comments.get_absolute_url }}{% else %}http{% if request.is_secure %}s{% endif %}://{{ request.META.HTTP_HOST }}{{ object_for_comments.get_absolute_url }}{% endif %}';
     var disqus_title = '{{ object_for_comments|escapejs }}';
     var disqus_identifier = '{% disqus_id_for object_for_comments %}';
   (function() {

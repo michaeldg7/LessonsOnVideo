@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% load i18n future mezzanine_tags blog_tags keyword_tags disqus_tags %}
+
+{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Blog" %}{% endif %}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ page.description }}
+{% endmetablock %}{% endblock %}
+
+{% block title %}
+{% if page %}
+{% editable page.title %}{{ page.title }}{% endeditable %}
+{% else %}
+{% trans "Blog" %}
+{% endif %}
+{% endblock %}
+
+{% block breadcrumb_menu %}
+    {{ block.super }}
+    {% if tag or category or year or month or author %}
+    <li>{% spaceless %}
+    {% if tag %}
+        {% trans "Tag:" %} {{ tag }}
+    {% else %}{% if category %}
+        {% trans "Category:" %} {{ category }}
+    {% else %}{% if year or month %}
+        {% if month %}{{ month }}, {% endif %}{{ year }}
+    {% else %}{% if author %}
+        {% trans "Author:" %} {{ author.get_full_name|default:author.username }}
+    {% endif %}{% endif %}{% endif %}{% endif %}
+    {% endspaceless %}
+    </li>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+<div class="sections">
+<h2 class="heading">
+    {% if tag or category or year or month or author %}
+        {% block blog_post_list_filterinfo %}
+        <p>
+        {% if tag %}
+            {% trans "Viewing posts tagged" %} {{ tag }}
+        {% else %}{% if category %}
+            {% trans "Viewing posts for the category" %} {{ category }}
+        {% else %}{% if year or month %}
+            {% trans "Viewing posts from" %} {% if month %}{{ month }}, {% endif %}
+            {{ year }}
+        {% else %}{% if author %}
+            {% trans "Viewing posts by" %}
+            {{ author.get_full_name|default:author.username }}
+        {% endif %}{% endif %}{% endif %}{% endif %}
+        {% endblock %}
+        </p>
+    {% else %}
+        {% if page %}
+        {% block blog_post_list_pagecontent %}
+        {% if page.get_content_model.content %}
+            {% editable page.get_content_model.content %}
+            {{ page.get_content_model.content|richtext_filters|safe }}
+            {% endeditable %}
+        {% endif %}
+        {% endblock %}
+        {% endif %}
+    {% endif %}
+</h2>
+<div class="clearfix"></div>
+
+<div class="row lessons-div">
+    {% for blog_post in blog_posts.object_list %}
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12"> 
+
+            <div class="blogposttwo">
+                <figure>
+                    {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
+                    {% block blog_post_list_post_featured_image %}
+                    <a href="{{ blog_post.get_absolute_url }}">
+                        <img alt="" class="img-responsive hovereffect" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 300 300 %}">
+                    </a>
+                    {% endblock %}
+                    {% endif %}
+                </figure>
+                <div class="text">
+                    {% block blog_post_list_post_title %}
+                    {% editable blog_post.title %}
+                    <h4><a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a></h4>
+                    {% endeditable %}
+                    {% endblock %}
+                    {% block blog_post_list_post_metainfo %}
+                    {% editable blog_post.publish_date %}
+                    <ul>
+                        <li><i class="fa fa-calendar"></i>{{ blog_post.publish_date }}</li>
+                        <li>
+                            <i class="fa fa-align-justify"></i>
+                            {% with blog_post.categories.all as categories %}
+                            {% if categories %}
+                            {% for category in categories %}
+                            <a href="{% url "blog_post_list_category" category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}                            
+                        </li>
+                    </ul>
+                    {% endeditable %}
+                    {% endblock %}
+                    {% block blog_post_list_post_content %}
+                    {% editable blog_post.content %}
+                    <p>
+                        {{ blog_post.description_from_content|safe }}
+                    </p>                    
+                    {% endeditable %}
+                    {% endblock %}
+                    <a class="btn btn-primary btn-xs backcolor" href="{{ blog_post.get_absolute_url }}">{% trans "read more" %}</a>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    {% endfor %}
+</div>
+
+{% pagination_for blog_posts %}
+
+{% if settings.COMMENTS_DISQUS_SHORTNAME %}
+{% include "generic/includes/disqus_counts.html" %}
+{% endif %}
+
+</div>
+{% endblock %}
+
+{% block right_panel %}
+{% include "blog/includes/filter_panel.html" %}
+{% endblock %}

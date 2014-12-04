@@ -308,6 +308,9 @@ SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'last_name', '
 DISQUS_API_KEY = ''
 DISQUS_WEBSITE_SHORTNAME = ''
 
+
+BLOG_USE_FEATURED_IMAGE = True
+
 ##################
 # EMAIL SETTINGS #
 ##################
