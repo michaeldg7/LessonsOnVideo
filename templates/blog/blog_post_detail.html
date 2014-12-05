@@ -95,7 +95,7 @@
         <div class="row">
             {% block blog_post_detail_related_posts %}
                 {% if blog_post.related_posts.all %}
-                    {% for post in blog_post.related_posts.all|slice:":3" %}
+                    {% for post in blog_post.related_posts.all %}
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                             <div class="blogposttwo">
                                 <figure>
@@ -106,7 +106,7 @@
                                     {% endif %}
                                 </figure>
                                 <div class="text">
-                                    <h4><a href="blogdetail-double-sidebar.html"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+                                    <h4><a href="blogdetail-double-sidebar.html"><a href="{{ post.get_absolute_url }}">{{ post.title|truncatechars:20 }}</a></h4>
                                     <ul>
                                         <li><i class="fa fa-calendar"></i>{{ post.publish_date }}</li>
                                         <li>
@@ -135,195 +135,26 @@
     <div class="clearfix"></div>
     <!-- Contents Section Started -->
     <div class="sections">
-        <div id="comments">
-            {% block blog_post_detail_commentlink %}
-            <h2 class="heading">
-                {% if blog_post.allow_comments %}
-                    {% if settings.COMMENTS_DISQUS_SHORTNAME %}
-                        <a href="{{ blog_post.get_absolute_url }}#disqus_thread"
-                            data-disqus-identifier="{% disqus_id_for blog_post %}">{% spaceless %}
-                            {% trans "Comments" %}
-                        {% endspaceless %}</a>
-                    {% else %}(<a href="#comments">{% spaceless %}
-                        {% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
-                        {% endspaceless %}</a>)
-                    {% endif %}
+        {% block blog_post_detail_commentlink %}
+        <h2 class="heading">
+            {% if blog_post.allow_comments %}
+                {% if settings.COMMENTS_DISQUS_SHORTNAME %}
+                    <a href="{{ blog_post.get_absolute_url }}#disqus_thread"
+                        data-disqus-identifier="{% disqus_id_for blog_post %}">{% spaceless %}
+                        {% trans "Comments" %}
+                    {% endspaceless %}</a>
+                {% else %}(<a href="#comments">{% spaceless %}
+                    {% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
+                    {% endspaceless %}</a>)
                 {% endif %}
-            </h2>
-            {% endblock %}
-            {% block blog_post_detail_comments %}
-                {% if blog_post.allow_comments %}{% comments_for blog_post %}{% endif %}
-            {% endblock %}
-        </div>
-        {% comment %}
-        <h2 class="heading">Comments (19)</h2>
-        <div class="clearfix"></div>
-        <div id="comments">
-            <div class="media">
-                <a href="#" class="pull-left">
-                    <img alt="" class="media-object" src="images/avatar5.jpg" />
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="#">William M. Huggard</a></h4>
-                    <time datetime="2014-05-12T17:02">MAY 12, 2013 - 5:02 pm</time>
-                    <p>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </p>
-                    <a class="btn btn-primary btn-xs backcolor" href="#">Reply</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Contents Section End -->
-    <div class="clearfix"></div>
-    <!-- Contents Section Started -->
-    <div class="sections">
-        <h2 class="heading">Leave Reply</h2>
-        <div class="clearfix"></div>
-        <div id="leavereply">
-            <form action="send.php">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="form-group">
-                            <label>Your Name</label>
-                            <input type="text" class="form-control" placeholder="Your Name">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="form-group">
-                            <label>Email Address</label>
-                            <input type="email" class="form-control" placeholder="Email Address">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="form-group">
-                            <label>Website</label>
-                            <input type="url" class="form-control" placeholder="Website">
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="form-group">
-                            <label>Your Comments</label>
-                            <textarea class="form-control" rows="3" placeholder="Your Comments"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <button type="submit" class="btn btn-primary backcolor">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        {% endcomment %}
-    </div>
-    <!-- Contents Section End -->
-    <div class="clearfix"></div>
-
-            {% comment %}
-            {% block blog_post_detail_postedby %}
-            {% editable blog_post.publish_date %}
-            <h6 class="post-meta">
-                {% trans "Posted by" %}:
-                {% with blog_post.user as author %}
-                <a href="{% url "blog_post_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
-                {% endwith %}
-                {% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %}
-            </h6>
-            {% endeditable %}
-            {% endblock %}
-            {% block blog_post_detail_commentlink %}
-            <p>
-                {% if blog_post.allow_comments %}
-                    {% if settings.COMMENTS_DISQUS_SHORTNAME %}
-                        (<a href="{{ blog_post.get_absolute_url }}#disqus_thread"
-                            data-disqus-identifier="{% disqus_id_for blog_post %}">{% spaceless %}
-                            {% trans "Comments" %}
-                        {% endspaceless %}</a>)
-                    {% else %}(<a href="#comments">{% spaceless %}
-                        {% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
-                        {% endspaceless %}</a>)
-                    {% endif %}
-                {% endif %}
-            </p>
-            {% endblock %}
-            {% block blog_post_detail_featured_image %}
-            {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
-            <p><img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 600 0 %}"></p>
             {% endif %}
-            {% endblock %}
-
-            {% if settings.COMMENTS_DISQUS_SHORTNAME %}
-            {% include "generic/includes/disqus_counts.html" %}
-            {% endif %}
-            {% block blog_post_detail_content %}
-            {% editable blog_post.content %}
-            {{ blog_post.content|richtext_filters|safe }}
-            {% endeditable %}
-            {% endblock %}
-
-            {% block blog_post_detail_keywords %}
-            {% keywords_for blog_post as tags %}
-            {% if tags %}
-            {% spaceless %}
-            <ul class="list-inline tags">
-                <li>{% trans "Tags" %}:</li>
-                {% for tag in tags %}
-                <li><a href="{% url "blog_post_list_tag" tag.slug %}">{{ tag }}</a></li>
-                {% endfor %}
-            </ul>
-            {% endspaceless %}
-            {% endif %}
-            {% endblock %}
-
-            {% block blog_post_detail_rating %}
-            <div class="panel panel-default rating">
-                <div class="panel-body">
-                {% rating_for blog_post %}
-                </div>
-            </div>
-            {% endblock %}
-
-            {% block blog_post_detail_sharebuttons %}
-            {% set_short_url_for blog_post %}
-            <a class="btn btn-sm share-twitter" target="_blank" href="http://twitter.com/home?status={{ blog_post.short_url|urlencode }}%20{{ blog_post.title|urlencode }}">{% trans "Share on Twitter" %}</a>
-            <a class="btn btn-sm share-facebook" target="_blank" href="http://facebook.com/sharer.php?u={{ request.build_absolute_uri }}&amp;t={{ blog_post.title|urlencode }}">{% trans "Share on Facebook" %}</a>
-            {% endblock %}
-
-            {% block blog_post_previous_next %}
-            <ul class="pager">
-            {% with blog_post.get_previous_by_publish_date as previous %}
-            {% if previous %}
-            <li class="previous">
-                <a href="{{ previous.get_absolute_url }}">&larr; {{ previous }}</a>
-            </li>
-            {% endif %}
-            {% endwith %}
-            {% with blog_post.get_next_by_publish_date as next %}
-            {% if next %}
-            <li class="next">
-                <a href="{{ next.get_absolute_url }}">{{ next }} &rarr;</a>
-            </li>
-            {% endif %}
-            {% endwith %}
-            </ul>
-            {% endblock %}
-
-            {% block blog_post_detail_related_posts %}
-            {% if blog_post.related_posts.all %}
-            <div id="related-posts">
-            <h3>{% trans 'Related posts' %}</h3>
-            <ul class="list-unstyled">
-            {% for post in blog_post.related_posts.all %}
-                 <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
-            {% endfor %}
-            </ul>
-            </div>
-            {% endif %}
-            {% endblock %}
-
-            {% block blog_post_detail_comments %}
+        </h2>
+        {% endblock %}
+        {% block blog_post_detail_comments %}
             {% if blog_post.allow_comments %}{% comments_for blog_post %}{% endif %}
-            {% endblock %}
-            {% endcomment %}
-        
+        {% endblock %}
     </div>
+    <!-- Contents Section End -->
+    <div class="clearfix"></div>        
+
 {% endblock %}

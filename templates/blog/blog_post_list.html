@@ -25,6 +25,7 @@
 
 {% block breadcrumb_menu %}
     {{ block.super }}
+    <li><a href="{% url 'blog_post_list' %}">Blog</a></li>
     {% if tag or category or year or month or author %}
     <li>{% spaceless %}
     {% if tag %}
@@ -91,7 +92,7 @@
                 <div class="text">
                     {% block blog_post_list_post_title %}
                     {% editable blog_post.title %}
-                    <h4><a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a></h4>
+                    <h4><a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title|truncatechars:20 }}</a></h4>
                     {% endeditable %}
                     {% endblock %}
                     {% block blog_post_list_post_metainfo %}
@@ -114,7 +115,7 @@
                     {% block blog_post_list_post_content %}
                     {% editable blog_post.content %}
                     <p>
-                        {{ blog_post.description_from_content|safe }}
+                        {{ blog_post.description_from_content|safe|truncatechars:50 }}
                     </p>                    
                     {% endeditable %}
                     {% endblock %}

@@ -3,6 +3,16 @@
 <div id="disqus_thread"></div>
 {% disqus_sso_script %}
 <script>
+    function disqus_config() {
+        this.callbacks.onReady = [function() {
+            jQuery('.equalcol').responsiveEqualHeightGrid();
+            window.setTimeout(function() {
+            jQuery('.equalcol').responsiveEqualHeightGrid();}, 200);
+        }];
+        this.callbacks.onNewComment = [function() {
+            jQuery('.equalcol').responsiveEqualHeightGrid();
+        }];
+    }
     var disqus_developer = '{{ settings.DEV_SERVER }}' == 'True';
     var disqus_url = '{% if "http" in object_for_comments.get_absolute_url %}{{ object_for_comments.get_absolute_url }}{% else %}http{% if request.is_secure %}s{% endif %}://{{ request.META.HTTP_HOST }}{{ object_for_comments.get_absolute_url }}{% endif %}';
     var disqus_title = '{{ object_for_comments|escapejs }}';

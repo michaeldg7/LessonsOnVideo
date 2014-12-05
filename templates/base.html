@@ -190,7 +190,7 @@
                                                                             <ul class="list-unstyled">
                                                                                 {% for category in node.get_children %}
                                                                                     <li><a href="{% url 'category_videos' category.slug %}">{{ category.title }}</a></li>
-                                                                                {% endfor %}
+                                                                                {% endfor %}   
                                                                             </ul>
                                                                         </div>
                                                                     </div>
@@ -201,6 +201,7 @@
                                                 </li>
                                                 <!-- Home Page Styles End -->
                                             {% endrecursetree %}
+                                            <li><a href="{% url 'blog_post_list' %}">Blog</a></li>
                                         </ul>
                                     </div>
                                 </div>

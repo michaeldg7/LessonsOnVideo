@@ -35,5 +35,6 @@ def get_videos_by_categories(categories):
     """
     Returns 'lessons.VideoLesson' queryset based on the given list of categories.
     """
-    lessons = VideoLesson.objects.filter(category__in=categories)
-    return lessons
+    if isinstance(categories, Category):
+        return VideoLesson.objects.filter(category=categories)
+    return VideoLesson.objects.filter(category__in=categories)
