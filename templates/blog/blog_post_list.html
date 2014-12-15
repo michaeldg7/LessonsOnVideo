@@ -89,7 +89,7 @@
                     {% endblock %}
                     {% endif %}
                 </figure>
-                <div class="text">
+                <div class="text blog-description">
                     {% block blog_post_list_post_title %}
                     {% editable blog_post.title %}
                     <h4><a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title|truncatechars:20 }}</a></h4>
