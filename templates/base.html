@@ -179,7 +179,7 @@
                                             {% recursetree CATEGORIES %}
                                                 <!-- Home Page Styles Start -->
                                                 <li class="dropdown">
-                                                    <a href="{% if not node.is_leaf_node %}{% url 'home' %}{% else %}{% url 'category_videos' node.slug %}{% endif %}" {% if not node.is_leaf_node %}data-toggle="dropdown" class="dropdown-toggle"{% endif %}>{{ node.title }}</a>
+                                                    <a href="{% if not node.is_leaf_node %}{% url 'home' %}{% else %}{% url 'category_videos' node.slug %}{% endif %}" {% if not node.is_leaf_node %}data-toggle="dropdown" class="dropdown-toggle dropdown-link"{% else %}class="dropdown-link"{% endif %}>{{ node.title }}</a>
                                                     {% if not node.is_leaf_node %}
                                                         <ul class="dropdown-menu">
                                                             <li>
@@ -201,7 +201,7 @@
                                                 </li>
                                                 <!-- Home Page Styles End -->
                                             {% endrecursetree %}
-                                            <li><a href="{% url 'blog_post_list' %}">Blog</a></li>
+                                            <li><a class="dropdown-link" href="{% url 'blog_post_list' %}">Blog</a></li>
                                         </ul>
                                     </div>
                                 </div>

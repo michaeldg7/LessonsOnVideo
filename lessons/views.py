@@ -114,7 +114,7 @@ def category_videos_ajax(request, category_slug, template_name="lessons/ajax/cat
 
     """
     category = get_object_or_404(Category, slug=category_slug)
-    lessons_list = VideoLesson.objects.filter(category=category)
+    lessons_list = VideoLesson.objects.filter(category=category).order_by('order')
 
     page = request.GET.get('page')
     try:

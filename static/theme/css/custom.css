@@ -12,3 +12,11 @@
     height: 340px;
     overflow-y: scroll;
 }
+
+.editable-original p {
+    font-size: 14px;
+}
+
+.stick li a.dropdown-link {
+    color: #fff !important;
+}
