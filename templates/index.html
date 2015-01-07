@@ -12,66 +12,97 @@
                 <h2 class="heading">{{ category.title }}</h2>
                 <div class="clearfix"></div>
                 <div class="row">
-                    {% if category.get_children %}
-                        {% for lesson in category.get_children|get_videos_by_categories|slice:":4" %}
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> 
-                                <!-- Video Box Start -->
-                                <div class="videobox2">
-                                    <figure> 
-                                        <!-- Video Thumbnail Start --> 
-                                        <a href="{% url 'video_detail' lesson.slug %}">
-                                            <img src="{{ lesson.thumbnail }}" class="img-responsive hovereffect index-thumbnail" alt="" />
-                                        </a> 
-                                        <!-- Video Thumbnail End --> 
-                                        <!-- Video Info Start -->
-                                        <div class="vidopts">
-                                            <ul>
-                                                <li><i class="fa fa-clock-o"></i>{{ lesson.duration|convert_to_time }}</li>
-                                            </ul>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <!-- Video Info End --> 
-                                    </figure>
-                                    <!-- Video Title Start -->
-                                    <h4><a href="{% url 'video_detail' lesson.slug %}">{{ lesson.title|truncatechars:30 }}</a></h4>
-                                    <!-- Video Title End --> 
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 equalcol conentsection">
+                        {% if category.get_children %}
+                            {% for lesson in category.get_children|get_videos_by_categories|slice:":4" %}
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> 
+                                    <!-- Video Box Start -->
+                                    <div class="videobox2">
+                                        <figure> 
+                                            <!-- Video Thumbnail Start --> 
+                                            <a href="{% url 'video_detail' lesson.slug %}">
+                                                <img src="{{ lesson.thumbnail }}" class="img-responsive hovereffect index-thumbnail" alt="" />
+                                            </a> 
+                                            <!-- Video Thumbnail End --> 
+                                            <!-- Video Info Start -->
+                                            <div class="vidopts">
+                                                <ul>
+                                                    <li><i class="fa fa-clock-o"></i>{{ lesson.duration|convert_to_time }}</li>
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <!-- Video Info End --> 
+                                        </figure>
+                                        <!-- Video Title Start -->
+                                        <h4><a href="{% url 'video_detail' lesson.slug %}">{{ lesson.title|truncatechars:30 }}</a></h4>
+                                        <!-- Video Title End --> 
+                                    </div>
+                                    <!-- Video Box End --> 
                                 </div>
-                                <!-- Video Box End --> 
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% for lesson in category|get_videos_by_categories|slice:":4" %}
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> 
-                                <!-- Video Box Start -->
-                                <div class="videobox2">
-                                    <figure> 
-                                        <!-- Video Thumbnail Start --> 
-                                        <a href="{% url 'video_detail' lesson.slug %}">
-                                            <img src="{{ lesson.thumbnail }}" class="img-responsive hovereffect index-thumbnail" alt="" />
-                                        </a> 
-                                        <!-- Video Thumbnail End --> 
-                                        <!-- Video Info Start -->
-                                        <div class="vidopts">
-                                            <ul>
-                                                <li><i class="fa fa-clock-o"></i>{{ lesson.duration|convert_to_time }}</li>
-                                            </ul>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <!-- Video Info End --> 
-                                    </figure>
-                                    <!-- Video Title Start -->
-                                    <h4><a href="{% url 'video_detail' lesson.slug %}">{{ lesson.title|truncatechars:30 }}</a></h4>
-                                    <!-- Video Title End --> 
+                            {% endfor %}
+                        {% else %}
+                            {% for lesson in category|get_videos_by_categories|slice:":4" %}
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> 
+                                    <!-- Video Box Start -->
+                                    <div class="videobox2">
+                                        <figure> 
+                                            <!-- Video Thumbnail Start --> 
+                                            <a href="{% url 'video_detail' lesson.slug %}">
+                                                <img src="{{ lesson.thumbnail }}" class="img-responsive hovereffect index-thumbnail" alt="" />
+                                            </a> 
+                                            <!-- Video Thumbnail End --> 
+                                            <!-- Video Info Start -->
+                                            <div class="vidopts">
+                                                <ul>
+                                                    <li><i class="fa fa-clock-o"></i>{{ lesson.duration|convert_to_time }}</li>
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <!-- Video Info End --> 
+                                        </figure>
+                                        <!-- Video Title Start -->
+                                        <h4><a href="{% url 'video_detail' lesson.slug %}">{{ lesson.title|truncatechars:30 }}</a></h4>
+                                        <!-- Video Title End --> 
+                                    </div>
+                                    <!-- Video Box End --> 
                                 </div>
-                                <!-- Video Box End --> 
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 equalcol graysidebar margin-bottom-20">
+                        {% for ad in category.get_ads %}
+                            <!-- Advertisement start -->
+                            <div class="widget">
+                                {{ ad.ad_script|safe }}
                             </div>
+                            <div class="clearfix"></div>
+                            <!-- Advertisement End -->
                         {% endfor %}
-                    {% endif %}
+                    </div>
                 </div>
             </div>
             <!-- Contents Section End -->
         {% endfor %}
         <div class="clearfix"></div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 equalcol graysidebar margin-top-20">
+            {% if home_page.ad_bottom_left %}
+                {{ home_page.ad_bottom_left|safe }}
+            {% else %}
+                <figure class="header-adv">
+                    <a href="#"><img src="{{ STATIC_URL }}theme/images/adv.gif" class="img-responsive" alt="Advertisment" /></a>
+                </figure>
+            {% endif %}
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 equalcol graysidebar margin-top-20">
+            {% if home_page.ad_bottom_right %}
+                {{ home_page.ad_bottom_right|safe }}
+            {% else %}
+                <figure class="header-adv">
+                    <a href="#"><img src="{{ STATIC_URL }}theme/images/adv.gif" class="img-responsive" alt="Advertisment" /></a>
+                </figure>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
 {% block default_main %}{% endblock %}

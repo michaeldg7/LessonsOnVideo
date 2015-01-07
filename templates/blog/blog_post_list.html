@@ -139,3 +139,19 @@
 {% block right_panel %}
 {% include "blog/includes/filter_panel.html" %}
 {% endblock %}
+
+{% block sidebar_ads %}
+    {% for blog_post in blog_posts.object_list %}
+        {% for ad in blog_post.blogadvertisement_set.all %}
+            {% if mycycle < 5 %} 
+                <!-- {% cycle 1 2 3 4 5 6 as mycycle %} -->
+                <!-- Advertisement start -->
+                <div class="widget">
+                    {{ ad.ad_script|safe }}
+                </div>
+                <div class="clearfix"></div>
+                <!-- Advertisement End -->
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

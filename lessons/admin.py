@@ -1,11 +1,38 @@
 from django import forms
 from django.contrib import admin
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from embed_video.admin import AdminVideoMixin
 from mptt.admin import MPTTModelAdmin
 from ordered_model.admin import OrderedModelAdmin
 
-from lessons.models import Category, VideoLesson, Product, ProductFile, Advertisement
+from lessons.models import (HomePage, Category, VideoLesson,
+    Product, ProductFile, Advertisement, BlogAdvertisement)
+
+
+class HomePageAdmin(admin.ModelAdmin):
+
+    def get_actions(self, request):
+        return []
+
+    def change_redirect(self):
+        opts = HomePage._meta
+        url = "admin:{}_{}_{}".format(
+            opts.app_label, opts.object_name.lower(), "change")
+        return HttpResponseRedirect(reverse(url, args=(1,)))
+
+    def add_view(self, *args, **kwargs):
+        return self.change_redirect()
+
+    def changelist_view(self, *args, **kwargs):
+        return self.change_redirect()
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 class VideoLessonAdminForm(forms.ModelForm):
@@ -98,7 +125,29 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title", )}
     inlines = [ProductFileInline]
 
-
+admin.site.register(HomePage, HomePageAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(VideoLesson, VideoLessonAdmin)
 # admin.site.register(Product, ProductAdmin)
+
+#from copy import deepcopy
+from mezzanine.blog.admin import BlogPostAdmin
+from mezzanine.blog.models import BlogPost
+
+
+class BlogAdvertisementInline(admin.StackedInline):
+    """
+    Inline view of Advertisement admin
+    """
+    model = BlogAdvertisement
+    extra = 4
+
+# blog_fieldsets = deepcopy(BlogPostAdmin.fieldsets)
+# blog_fieldsets[0][1]["fields"].insert(-2, "image")
+
+class MyBlogPostAdmin(BlogPostAdmin):
+    inlines = [BlogAdvertisementInline]
+    #fieldsets = blog_fieldsets
+
+admin.site.unregister(BlogPost)
+admin.site.register(BlogPost, MyBlogPostAdmin)

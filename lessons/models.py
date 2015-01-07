@@ -16,6 +16,7 @@ from django.utils.translation import ugettext_lazy as _
 from embed_video.backends import detect_backend
 from embed_video.fields import EmbedVideoField
 from mezzanine.generic.fields import CommentsField, KeywordsField
+from mezzanine.blog.models import BlogPost
 from mptt.models import MPTTModel, TreeForeignKey
 from ordered_model.models import OrderedModel
 
@@ -57,6 +58,15 @@ class CustomMetaData(models.Model):
     class Meta:
         abstract = True
 
+
+class HomePage(models.Model):
+    ad_top = models.TextField(blank=True, null=True, help_text="Ad script for the top banner")
+    ad_bottom_left = models.TextField(blank=True, null=True, help_text="Ad script for the bottom left banner")
+    ad_bottom_right = models.TextField(blank=True, null=True, help_text="Ad script for the bottom right banner")
+
+    def __unicode__(self):
+        return u"Home Page Settings"
+
 class Category(MPTTModel, CustomMetaData):
     """
     Stores information about Video Categories.
@@ -94,6 +104,18 @@ class Advertisement(models.Model):
     class Meta:
         verbose_name = "Advertisement"
         verbose_name_plural = "Advertisements"
+
+
+class BlogAdvertisement(models.Model):
+    """
+    Contains ad script of a particular :model:'mezzanine.blog.models.BlogPost' instance.
+    """
+    post = models.ForeignKey(BlogPost)
+    ad_script = models.TextField()
+
+    class Meta:
+        verbose_name = "Blog Advertisement"
+        verbose_name_plural = "Blog Advertisements"
 
 
 class Product(models.Model):

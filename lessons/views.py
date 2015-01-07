@@ -34,9 +34,8 @@ def homepage(request, template_name="index.html"):
         :template:'index.html'
 
     """
-    main_categories = Category.objects.filter(parent__isnull=True)
     context = {
-        "main_categories": main_categories
+        "main_categories": Category.objects.filter(parent__isnull=True)
     }
     return render_to_response(template_name, context, RequestContext(request))
 

@@ -1,6 +1,6 @@
 from django import template
 
-from lessons.models import Category, VideoLesson
+from lessons.models import Category, VideoLesson, HomePage
 
 register = template.Library()
 
@@ -38,3 +38,8 @@ def get_videos_by_categories(categories):
     if isinstance(categories, Category):
         return VideoLesson.objects.filter(category=categories)
     return VideoLesson.objects.filter(category__in=categories)
+
+
+@register.assignment_tag
+def home_page():
+    return HomePage.objects.first()

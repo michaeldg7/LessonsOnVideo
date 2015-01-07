@@ -20,3 +20,11 @@
 .stick li a.dropdown-link {
     color: #fff !important;
 }
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
