@@ -7,11 +7,15 @@ from embed_video.admin import AdminVideoMixin
 from mptt.admin import MPTTModelAdmin
 from ordered_model.admin import OrderedModelAdmin
 
+from mezzanine.blog.admin import BlogPostAdmin
+from mezzanine.blog.models import BlogPost
+
 from lessons.models import (HomePage, Category, VideoLesson,
     Product, ProductFile, Advertisement, BlogAdvertisement)
 
 
 class HomePageAdmin(admin.ModelAdmin):
+    fields = ('ad_top', 'ad_bottom_left', 'ad_bottom_right')
 
     def get_actions(self, request):
         return []
@@ -125,15 +129,6 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title", )}
     inlines = [ProductFileInline]
 
-admin.site.register(HomePage, HomePageAdmin)
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(VideoLesson, VideoLessonAdmin)
-# admin.site.register(Product, ProductAdmin)
-
-#from copy import deepcopy
-from mezzanine.blog.admin import BlogPostAdmin
-from mezzanine.blog.models import BlogPost
-
 
 class BlogAdvertisementInline(admin.StackedInline):
     """
@@ -142,12 +137,13 @@ class BlogAdvertisementInline(admin.StackedInline):
     model = BlogAdvertisement
     extra = 4
 
-# blog_fieldsets = deepcopy(BlogPostAdmin.fieldsets)
-# blog_fieldsets[0][1]["fields"].insert(-2, "image")
-
 class MyBlogPostAdmin(BlogPostAdmin):
     inlines = [BlogAdvertisementInline]
-    #fieldsets = blog_fieldsets
+
+admin.site.register(HomePage, HomePageAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(VideoLesson, VideoLessonAdmin)
+# admin.site.register(Product, ProductAdmin)
 
 admin.site.unregister(BlogPost)
 admin.site.register(BlogPost, MyBlogPostAdmin)

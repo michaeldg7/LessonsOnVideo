@@ -67,6 +67,7 @@ class HomePage(models.Model):
     def __unicode__(self):
         return u"Home Page Settings"
 
+
 class Category(MPTTModel, CustomMetaData):
     """
     Stores information about Video Categories.
