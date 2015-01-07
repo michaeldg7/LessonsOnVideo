@@ -43,13 +43,20 @@
                     duration: 400,
                     progress: function() {
                         jQuery('.equalcol').responsiveEqualHeightGrid();
-                }});
+                    },
+                    complete: function() {
+                        $('.category-thumbnail').height($('.category-thumbnail').height())
+                    },
+                });
             }
         });
     }
 
     $(document).ready(function() {
         callCategoryAjax();
+        $( window ).resize(function() {
+            $('.category-thumbnail').height($('.category-thumbnail').width()*0.75)
+        });
     });
     </script>
 {% endblock %}
