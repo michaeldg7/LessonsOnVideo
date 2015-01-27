@@ -94,6 +94,9 @@ class Category(MPTTModel, CustomMetaData):
     def get_ads(self):
         return self.advertisement_set.all()
 
+    def get_videos(self):
+        return self.homepagevideo_set.all()
+
 
 class Advertisement(models.Model):
     """
@@ -270,3 +273,15 @@ class VideoLesson(OrderedModel, CustomMetaData):
 
     def get_absolute_url(self):
         return "%s%s" % (settings.SITE_FULL_DOMAIN, reverse('video_detail', args=(self.slug, )))
+
+
+class HomePageVideo(models.Model):
+    """
+    Contains ad script of a particular :model:'lessons.HomePageVideo' instance.
+    """
+    category = TreeForeignKey(Category)
+    video = models.ForeignKey(VideoLesson)
+
+    class Meta:
+        verbose_name = "Home Page Video"
+        verbose_name_plural = "Home Page Videos"

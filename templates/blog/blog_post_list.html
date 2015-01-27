@@ -44,36 +44,6 @@
 
 {% block main %}
 <div class="sections">
-<h2 class="heading">
-    {% if tag or category or year or month or author %}
-        {% block blog_post_list_filterinfo %}
-        <p>
-        {% if tag %}
-            {% trans "Viewing posts tagged" %} {{ tag }}
-        {% else %}{% if category %}
-            {% trans "Viewing posts for the category" %} {{ category }}
-        {% else %}{% if year or month %}
-            {% trans "Viewing posts from" %} {% if month %}{{ month }}, {% endif %}
-            {{ year }}
-        {% else %}{% if author %}
-            {% trans "Viewing posts by" %}
-            {{ author.get_full_name|default:author.username }}
-        {% endif %}{% endif %}{% endif %}{% endif %}
-        {% endblock %}
-        </p>
-    {% else %}
-        {% if page %}
-        {% block blog_post_list_pagecontent %}
-        {% if page.get_content_model.content %}
-            {% editable page.get_content_model.content %}
-            {{ page.get_content_model.content|richtext_filters|safe }}
-            {% endeditable %}
-        {% endif %}
-        {% endblock %}
-        {% endif %}
-    {% endif %}
-</h2>
-<div class="clearfix"></div>
 
 <div class="row lessons-div">
     {% for blog_post in blog_posts.object_list %}
@@ -146,7 +116,7 @@
             {% if mycycle < 5 %} 
                 <!-- {% cycle 1 2 3 4 5 6 as mycycle %} -->
                 <!-- Advertisement start -->
-                <div class="widget">
+                <div class="widget center">
                     {{ ad.ad_script|safe }}
                 </div>
                 <div class="clearfix"></div>

@@ -11,7 +11,8 @@ from mezzanine.blog.admin import BlogPostAdmin
 from mezzanine.blog.models import BlogPost
 
 from lessons.models import (HomePage, Category, VideoLesson,
-    Product, ProductFile, Advertisement, BlogAdvertisement)
+    Product, ProductFile, Advertisement, BlogAdvertisement,
+    HomePageVideo)
 
 
 class HomePageAdmin(admin.ModelAdmin):
@@ -60,6 +61,14 @@ class AdvertisementInline(admin.StackedInline):
     extra = 4
 
 
+class HomePageVideoInline(admin.StackedInline):
+    """
+    Inline view of HomePageVideo admin
+    """
+    model = HomePageVideo
+    extra = 3
+
+
 class CategoryAdmin(MPTTModelAdmin):
     """
     Admin view for :model:'lessons.Category' model
@@ -67,7 +76,7 @@ class CategoryAdmin(MPTTModelAdmin):
     model = Category
     prepopulated_fields = {"slug": ("title", )}
     mptt_level_indent = 20
-    inlines = [AdvertisementInline]
+    inlines = [AdvertisementInline, HomePageVideoInline]
 
     fieldsets = (
         ('Info', {

@@ -13,67 +13,38 @@
                 <div class="clearfix"></div>
                 <div class="row">
                     <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 equalcol conentsection">
-                        {% if category.get_children %}
-                            {% for lesson in category.get_children|get_videos_by_categories|slice:":4" %}
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> 
-                                    <!-- Video Box Start -->
-                                    <div class="videobox2">
-                                        <figure> 
-                                            <!-- Video Thumbnail Start --> 
-                                            <a href="{% url 'video_detail' lesson.slug %}">
-                                                <img src="{{ lesson.thumbnail }}" class="img-responsive hovereffect index-thumbnail" alt="" />
-                                            </a> 
-                                            <!-- Video Thumbnail End --> 
-                                            <!-- Video Info Start -->
-                                            <div class="vidopts">
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>{{ lesson.duration|convert_to_time }}</li>
-                                                </ul>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                            <!-- Video Info End --> 
-                                        </figure>
-                                        <!-- Video Title Start -->
-                                        <h4><a href="{% url 'video_detail' lesson.slug %}">{{ lesson.title|truncatechars:30 }}</a></h4>
-                                        <!-- Video Title End --> 
-                                    </div>
-                                    <!-- Video Box End --> 
+                        {% for lesson in category.get_videos|slice:":4" %}
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> 
+                                <!-- Video Box Start -->
+                                <div class="videobox2">
+                                    <figure> 
+                                        <!-- Video Thumbnail Start --> 
+                                        <a href="{% url 'video_detail' lesson.video.slug %}">
+                                            <img src="{{ lesson.video.thumbnail }}" class="img-responsive hovereffect index-thumbnail" alt="" />
+                                        </a> 
+                                        <!-- Video Thumbnail End --> 
+                                        <!-- Video Info Start -->
+                                        <div class="vidopts">
+                                            <ul>
+                                                <li><i class="fa fa-clock-o"></i>{{ lesson.video.duration|convert_to_time }}</li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <!-- Video Info End --> 
+                                    </figure>
+                                    <!-- Video Title Start -->
+                                    <h4><a href="{% url 'video_detail' lesson.video.slug %}">{{ lesson.video.title|truncatechars:30 }}</a></h4>
+                                    <!-- Video Title End --> 
                                 </div>
-                            {% endfor %}
-                        {% else %}
-                            {% for lesson in category|get_videos_by_categories|slice:":4" %}
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> 
-                                    <!-- Video Box Start -->
-                                    <div class="videobox2">
-                                        <figure> 
-                                            <!-- Video Thumbnail Start --> 
-                                            <a href="{% url 'video_detail' lesson.slug %}">
-                                                <img src="{{ lesson.thumbnail }}" class="img-responsive hovereffect index-thumbnail" alt="" />
-                                            </a> 
-                                            <!-- Video Thumbnail End --> 
-                                            <!-- Video Info Start -->
-                                            <div class="vidopts">
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>{{ lesson.duration|convert_to_time }}</li>
-                                                </ul>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                            <!-- Video Info End --> 
-                                        </figure>
-                                        <!-- Video Title Start -->
-                                        <h4><a href="{% url 'video_detail' lesson.slug %}">{{ lesson.title|truncatechars:30 }}</a></h4>
-                                        <!-- Video Title End --> 
-                                    </div>
-                                    <!-- Video Box End --> 
-                                </div>
-                            {% endfor %}
-                        {% endif %}
+                                <!-- Video Box End --> 
+                            </div>
+                        {% endfor %}
                     </div>
 
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 equalcol graysidebar margin-bottom-20">
                         {% for ad in category.get_ads %}
                             <!-- Advertisement start -->
-                            <div class="widget">
+                            <div class="widget center">
                                 {{ ad.ad_script|safe }}
                             </div>
                             <div class="clearfix"></div>
